@@ -76,18 +76,7 @@ function Player({ songDetail }: PlayerProps) {
         type="range"
         css={{
           width: "100%",
-          padding: 0,
-          "::-webkit-slider-runnable-track": {
-            WebkitAppearance: "none",
-          },
-          "::-webkit-slider-thumb": {
-            WebkitAppearance: "none",
-            appearance: "none",
-            backgroundColor: "white",
-            height: '8px'
-          },
           accentColor: "#20ACFB",
-          backgroundColor: "transparent"
         }}
       />
       <InnerContainer>
