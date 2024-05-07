@@ -32,6 +32,7 @@ function SongTile() {
           src="/J.jpg"
           css={{
             width: "80px",
+            height: "80px",
             borderRadius: "12px",
           }}
         />
