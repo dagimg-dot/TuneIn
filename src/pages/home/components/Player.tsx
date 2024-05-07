@@ -1,44 +1,135 @@
 import styled from "@emotion/styled";
+import { Song } from "../../../shared/types";
+import {
+  NextSongIcon,
+  PlayPauseIcon,
+  PreviousSongIcon,
+} from "../../../common/components/CustomIcons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHeart, faVolumeHigh } from "@fortawesome/free-solid-svg-icons";
 
 const Container = styled.div`
   color: white;
   grid-column-start: 1;
   grid-column-end: -1;
   border-radius: 0 0 0 40px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  backdrop-filter: blur(15px);
+
+  backdrop-filter: blur(20px);
   position: sticky;
   width: 100%;
   bottom: 0;
   height: 80px;
-  padding: 5px 10px 5px 30px;
 `;
 
-function Player() {
+const InnerContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 3px 10px 6px 30px;
+`;
+
+interface PlayerProps {
+  songDetail: Song;
+}
+
+function MainControl() {
+  return (
+    <div
+      css={{
+        display: "flex",
+        gap: "10px",
+      }}
+    >
+      <PreviousSongIcon />
+      <PlayPauseIcon isPlaying={false} />
+      <NextSongIcon />
+    </div>
+  );
+}
+
+function SecondaryControl() {
+  return (
+    <div css={{ display: "flex", gap: "15px", alignItems: "center" }}>
+      <div>2:39 / 4:23</div>
+      <div>
+        <FontAwesomeIcon icon={faHeart} size="lg" />
+      </div>
+      <div>
+        <FontAwesomeIcon icon={faVolumeHigh} size="lg" />
+      </div>
+      <input
+        type="range"
+        css={{
+          accentColor: "white",
+          outline: "none",
+          border: "none",
+        }}
+      />
+    </div>
+  );
+}
+
+function Player({ songDetail }: PlayerProps) {
   return (
     <Container>
-      <div
+      <input
+        type="range"
         css={{
-          display: "flex",
-          alignItems: "center",
-          gap: "15px",
+          width: "100%",
+          padding: 0,
+          "::-webkit-slider-runnable-track": {
+            WebkitAppearance: "none",
+          },
+          "::-webkit-slider-thumb": {
+            WebkitAppearance: "none",
+            appearance: "none",
+            backgroundColor: "white",
+            height: '8px'
+          },
+          accentColor: "#20ACFB",
+          backgroundColor: "transparent"
         }}
-      >
-        <div>image</div>
+      />
+      <InnerContainer>
         <div
           css={{
             display: "flex",
-            flexDirection: "column",
+            alignItems: "center",
+            gap: "15px",
           }}
         >
-          <div>title</div>
-          <div>name</div>
+          <img
+            src={songDetail.image}
+            css={{
+              width: "50px",
+              height: "50px",
+              borderRadius: "10px",
+            }}
+          />
+          <div
+            css={{
+              display: "flex",
+              flexDirection: "column",
+              gap: "5px",
+            }}
+          >
+            <span
+              css={{
+                fontWeight: "600",
+              }}
+            >
+              {songDetail.title}
+            </span>
+            <span>{songDetail.artist}</span>
+          </div>
         </div>
-      </div>
-      <div>primary control</div>
-      <div>sec control</div>
+        <div>
+          <MainControl />
+        </div>
+        <div>
+          <SecondaryControl />
+        </div>
+      </InnerContainer>
     </Container>
   );
 }

@@ -1,4 +1,5 @@
 import LeftSidebar from "../../common/components/LeftSidebar";
+import { currentSong } from "../../shared/data/songs";
 import Main from "./components/Main";
 import Player from "./components/Player";
 import RightSidebar from "./components/RightSidebar";
@@ -28,7 +29,7 @@ function Home() {
       >
         <Main />
         <RightSidebar />
-        <Player />
+        <Player songDetail={currentSong} />
       </div>
     </HomeLayout>
   );
