@@ -7,6 +7,7 @@ import styled from "@emotion/styled";
 import SongTile from "../../../common/components/SongTile";
 import { Light } from "../../../styles/colors";
 import Heading from "../../../common/components/Heading";
+import { currentSong } from "../../../shared/data/songs";
 
 const Container = styled.div`
   padding: 10px;
@@ -27,20 +28,21 @@ function RightSidebar() {
       <div css={{ height: "100px" }}></div>
       <Heading title="Now playing" />
       <SongList>
-        <SongTile />
-        <SongTile />
-        <SongTile />
-        <SongTile />
-        <SongTile />
-        <SongTile />
-        <SongTile />
-        <SongTile />
-        <SongTile />
-        <SongTile />
-        <SongTile />
-        <SongTile />
-        <SongTile />
-        <SongTile />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
       </SongList>
     </Container>
   );

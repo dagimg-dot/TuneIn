@@ -5,6 +5,7 @@
 import { jsx, css } from "@emotion/react";
 import { Light } from "../../styles/colors";
 import styled from "@emotion/styled";
+import { Song } from "../../shared/types";
 
 const Tile = styled.div`
   display: flex;
@@ -18,7 +19,7 @@ const Tile = styled.div`
   }
 `;
 
-function SongTile() {
+function SongTile({ artist, title, duration, image }: Song) {
   return (
     <Tile>
       <div
@@ -29,7 +30,7 @@ function SongTile() {
         }}
       >
         <img
-          src="/J.jpg"
+          src={image}
           css={{
             width: "80px",
             height: "80px",
@@ -43,11 +44,11 @@ function SongTile() {
             gap: "10px",
           }}
         >
-          <span>title</span>
-          <span>artist</span>
+          <span>{title}</span>
+          <span>{artist}</span>
         </div>
       </div>
-      <div>4:23</div>
+      <div>{duration}</div>
     </Tile>
   );
 }

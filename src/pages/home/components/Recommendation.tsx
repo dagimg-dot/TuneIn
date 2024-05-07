@@ -6,6 +6,7 @@ import { jsx, css } from "@emotion/react";
 import SongTile from "../../../common/components/SongTile";
 import styled from "@emotion/styled";
 import Heading from "../../../common/components/Heading";
+import { currentSong } from "../../../shared/data/songs";
 
 const SongGrid = styled.div`
   display: grid;
@@ -17,16 +18,16 @@ const SongGrid = styled.div`
 function Recommendation() {
   return (
     <div>
-      <Heading title="You may also like"/>
+      <Heading title="You may also like" />
       <SongGrid>
-        <SongTile />
-        <SongTile />
-        <SongTile />
-        <SongTile />
-        <SongTile />
-        <SongTile />
-        <SongTile />
-        <SongTile />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
+        <SongTile {...currentSong} />
       </SongGrid>
     </div>
   );
