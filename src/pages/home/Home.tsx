@@ -20,18 +20,15 @@ function Home() {
         css={{
           display: "grid",
           gridTemplateColumns: "4fr 1.5fr",
-          gridTemplateRows: "11fr 1fr",
           background: "linear-gradient(to top right, #2D2C25, #2F2723)",
           borderRadius: "40px 0 0 40px",
           height: "100dvh",
-          overflowY: "auto",
+          overflowY: "hidden",
         }}
       >
         <Main />
         <RightSidebar />
-        <div css={{ width: "100%" }}>
-          <Player />
-        </div>
+        <Player />
       </div>
     </HomeLayout>
   );

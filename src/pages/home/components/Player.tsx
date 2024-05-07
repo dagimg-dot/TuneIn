@@ -9,10 +9,11 @@ const Container = styled.div`
   justify-content: space-between;
   align-items: center;
   backdrop-filter: blur(15px);
-  position: absolute;
+  position: sticky;
+  width: 100%;
   bottom: 0;
-  width: inherit;
   height: 80px;
+  padding: 5px 10px 5px 30px;
 `;
 
 function Player() {
