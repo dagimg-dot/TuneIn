@@ -1,23 +1,27 @@
+/** @jsxRuntime classic */
+/** @jsx jsx */
+
+//@ts-ignore
+import { jsx, css } from "@emotion/react";
+import styled from "@emotion/styled";
+import { Link } from "react-router-dom";
+
+const LogoLink = styled(Link)`
+  margin: -20px 0 0 -8px;
+  width: 120px;
+`;
+
 function Logo() {
   return (
-    <div
-      css={{
-        margin: '-20px 0 0 -8px',
-        width: "120px",
-      }}
-    >
+    <LogoLink to={"/"}>
       <svg
         viewBox="0 0 48 48"
         xmlns="http://www.w3.org/2000/svg"
         fill="transparent"
         stroke="#eee"
       >
-        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-        <g
-          id="SVGRepo_tracerCarrier"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        ></g>
+        <g id="SVGRepo_bgCarrier"></g>
+        <g id="SVGRepo_tracerCarrier"></g>
         <g id="SVGRepo_iconCarrier">
           <rect x="4.5" y="19" width="24" height="14" rx="1"></rect>
           <rect x="28.5" y="15" width="15" height="14" rx="1"></rect>
@@ -33,7 +37,7 @@ function Logo() {
           <polyline points="34.854 25.071 34.854 18.929 38.923 25.071 38.923 18.929"></polyline>
         </g>
       </svg>
-    </div>
+    </LogoLink>
   );
 }
 
