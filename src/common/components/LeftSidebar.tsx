@@ -34,10 +34,25 @@ const LeftSidebar = () => {
           gap: "30px",
         }}
       >
-        <Tab title={"Browse"} icon={faGlobe} isActive />
-        <Tab title={"Tracks"} icon={faMusic} isActive={false} />
-        <Tab title={"Playlists"} icon={faHamburger} isActive={false} />
-        <Tab title={"Favorites"} icon={faHeart} isActive={false} />
+        <Tab title={"Browse"} navigateTo={"/"} icon={faGlobe} isActive={true} />
+        <Tab
+          title={"Tracks"}
+          navigateTo={"/tracks"}
+          icon={faMusic}
+          isActive={false}
+        />
+        <Tab
+          title={"Playlists"}
+          navigateTo={"/plalists"}
+          icon={faHamburger}
+          isActive={false}
+        />
+        <Tab
+          title={"Favorites"}
+          navigateTo={"/favorites"}
+          icon={faHeart}
+          isActive={false}
+        />
       </div>
       <div css={{ height: "100px" }}></div>
     </Container>
