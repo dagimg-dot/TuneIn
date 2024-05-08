@@ -4,13 +4,13 @@
 //@ts-ignore
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
-import Search from "./Search";
-import Featured from "./Featured";
-import { Light } from "../../../styles/colors";
-import PlaylistsSection from "./PlaylistsSection";
-import Recommendation from "./Recommendation";
+import { Light } from "../../styles/colors";
+import Featured from "./components/Featured";
+import PlaylistsSection from "./components/PlaylistsSection";
+import Recommendation from "./components/Recommendation";
+import Search from "./components/Search";
 
-const Browse = styled.div`
+const BrowseContainer = styled.div`
   display: flex;
   flex-direction: column;
   gap: 25px;
@@ -20,15 +20,15 @@ const Browse = styled.div`
   overflow-y: auto;
 `;
 
-function Main() {
+function Browse() {
   return (
-    <Browse>
+    <BrowseContainer>
       <Search />
       <Featured />
       <PlaylistsSection />
       <Recommendation />
-    </Browse>
+    </BrowseContainer>
   );
 }
 
-export default Main;
+export default Browse;

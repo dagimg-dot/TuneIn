@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
-import { Song } from "../../../shared/types";
+import { Song } from "../../shared/types";
 import {
   NextSongIcon,
   PlayPauseIcon,
   PreviousSongIcon,
-} from "../../../common/components/CustomIcons";
+} from "../../common/components/CustomIcons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart, faVolumeHigh } from "@fortawesome/free-solid-svg-icons";
 

@@ -5,10 +5,10 @@
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { Light } from "../../styles/colors";
-import Logo from "../../pages/home/components/Logo";
 import Tab from "./Tab";
 import { faGlobe, faHeart, faMusic } from "@fortawesome/free-solid-svg-icons";
 import { faHamburger } from "@fortawesome/free-solid-svg-icons/faHamburger";
+import Logo from "./Logo";
 
 const Container = styled.div`
   display: flex;

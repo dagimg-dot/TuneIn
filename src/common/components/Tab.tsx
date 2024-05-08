@@ -7,7 +7,7 @@ import styled from "@emotion/styled";
 import { Light } from "../../styles/colors";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 interface TabProps {
   title: string;
@@ -29,8 +29,9 @@ const StyledLink = styled(Link)`
 `;
 
 function Tab({ title, navigateTo, icon }: TabProps) {
+  const { pathname } = useLocation();
   const isActive = (path: string) => {
-    return location.pathname == path;
+    return pathname == path;
   };
   return (
     <StyledLink to={navigateTo}>

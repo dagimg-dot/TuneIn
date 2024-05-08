@@ -1,13 +1,16 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Home from "./pages/home/Home";
 import Tracks from "./pages/tracks/Tracks";
+import Default from "./layout/Default";
+import Browse from "./pages/home/Browse";
 
 function App() {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="tracks" element={<Tracks />} />
+        <Route element={<Default />}>
+          <Route path="/" element={<Browse />} />
+          <Route path="/tracks" element={<Tracks />} />
+        </Route>
       </Routes>
     </BrowserRouter>
   );

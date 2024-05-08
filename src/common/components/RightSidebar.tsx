@@ -4,10 +4,10 @@
 //@ts-ignore
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
-import SongTile from "../../../common/components/SongTile";
-import { Light } from "../../../styles/colors";
-import Heading from "../../../common/components/Heading";
-import { currentSong } from "../../../shared/data/songs";
+import { currentSong } from "../../shared/data/songs";
+import { Light } from "../../styles/colors";
+import Heading from "./Heading";
+import SongTile from "./SongTile";
 
 const Container = styled.div`
   padding: 10px;

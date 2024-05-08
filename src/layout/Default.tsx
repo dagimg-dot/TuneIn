@@ -1,9 +1,9 @@
-import LeftSidebar from "../../common/components/LeftSidebar";
-import { currentSong } from "../../shared/data/songs";
-import Main from "./components/Main";
-import Player from "./components/Player";
-import RightSidebar from "./components/RightSidebar";
 import styled from "@emotion/styled";
+import LeftSidebar from "../common/components/LeftSidebar";
+import { currentSong } from "../shared/data/songs";
+import { Outlet } from "react-router";
+import Player from "../common/components/Player";
+import RightSidebar from "../common/components/RightSidebar";
 
 const HomeLayout = styled.div`
   display: grid;
@@ -13,7 +13,7 @@ const HomeLayout = styled.div`
   overflow-y: auto;
 `;
 
-function Home() {
+function Default() {
   return (
     <HomeLayout>
       <LeftSidebar />
@@ -27,7 +27,7 @@ function Home() {
           overflowY: "hidden",
         }}
       >
-        <Main />
+        <Outlet />
         <RightSidebar />
         <Player songDetail={currentSong} />
       </div>
@@ -35,4 +35,4 @@ function Home() {
   );
 }
 
-export default Home;
+export default Default;
