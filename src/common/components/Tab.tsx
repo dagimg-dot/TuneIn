@@ -13,7 +13,6 @@ interface TabProps {
   title: string;
   navigateTo: string;
   icon: IconProp;
-  isActive: boolean;
 }
 
 const StyledLink = styled(Link)`
@@ -29,13 +28,16 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-function Tab({ title, navigateTo, icon, isActive }: TabProps) {
+function Tab({ title, navigateTo, icon }: TabProps) {
+  const isActive = (path: string) => {
+    return location.pathname == path;
+  };
   return (
     <StyledLink to={navigateTo}>
       <FontAwesomeIcon icon={icon} />
       <span
         css={{
-          fontWeight: isActive ? "bold" : "normal",
+          fontWeight: isActive(navigateTo) ? "bold" : "normal",
         }}
       >
         {title}
