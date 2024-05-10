@@ -13,7 +13,6 @@ const Container = styled.div`
   grid-column-start: 1;
   grid-column-end: -1;
   border-radius: 0 0 0 40px;
-
   backdrop-filter: blur(20px);
   position: sticky;
   width: 100%;
@@ -25,7 +24,7 @@ const InnerContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 3px 10px 6px 30px;
+  padding: 0px 10px 0px 30px;
 `;
 
 interface PlayerProps {
@@ -90,8 +89,8 @@ function Player({ songDetail }: PlayerProps) {
           <img
             src={songDetail.image}
             css={{
-              width: "50px",
-              height: "50px",
+              width: "45px",
+              height: "45px",
               borderRadius: "10px",
             }}
           />
