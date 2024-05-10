@@ -10,7 +10,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 const GradientContainer = styled.div`
   background: linear-gradient(to bottom, #20acfb, transparent);
   padding: 20px 30px 0 30px;
-  height: 30%;
+  height: 25%;
+  position: sticky;
+  top: 0;
+  z-index: 99;
 `;
 
 const LeftFlexItem = styled.div`
