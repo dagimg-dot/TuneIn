@@ -6,7 +6,7 @@ import { jsx, css } from "@emotion/react";
 
 import { faSearch } from "@fortawesome/free-solid-svg-icons/faSearch";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Light } from "../../../styles/colors";
+import { Light } from "../../../shared/styles/colors";
 
 function Search() {
   return (

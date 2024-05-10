@@ -5,9 +5,9 @@
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { currentSong } from "../../shared/data/songs";
-import { Light } from "../../styles/colors";
 import Heading from "./Heading";
 import SongTile from "./SongTile";
+import { Light } from "../../shared/styles/colors";
 
 const Container = styled.div`
   padding: 10px;
@@ -20,6 +20,7 @@ const SongList = styled.div`
   display: flex;
   flex-direction: column;
   gap: 10px;
+  padding-bottom: 80px;
 `;
 
 function RightSidebar() {

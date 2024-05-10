@@ -5,7 +5,7 @@
 import { jsx, css } from "@emotion/react";
 import { faPause, faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Light } from "../../styles/colors";
+import { Light } from "../../shared/styles/colors";
 
 export function PreviousSongIcon() {
   return (
@@ -67,5 +67,26 @@ export function PlayPauseIcon({ isPlaying }: { isPlaying: boolean }) {
         <FontAwesomeIcon icon={faPlay} color={Light.primary} />
       )}
     </div>
+  );
+}
+
+export function DurationIcon() {
+  return (
+    <svg
+      fill={Light.textSecondary}
+      viewBox="0 0 20 20"
+      width="20"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+      <g
+        id="SVGRepo_tracerCarrier"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      ></g>
+      <g id="SVGRepo_iconCarrier">
+        <path d="M10 20a10 10 0 1 1 0-20 10 10 0 0 1 0 20zm0-2a8 8 0 1 0 0-16 8 8 0 0 0 0 16zm-1-7.59V4h2v5.59l3.95 3.95-1.41 1.41L9 10.41z"></path>
+      </g>
+    </svg>
   );
 }

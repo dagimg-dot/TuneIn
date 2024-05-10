@@ -4,10 +4,10 @@
 //@ts-ignore
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { Light } from "../../../styles/colors";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import Heading from "../../../common/components/Heading";
+import { Light } from "../../../shared/styles/colors";
 
 const ListenBtn = styled.button`
   display: flex;

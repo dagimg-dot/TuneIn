@@ -4,7 +4,7 @@
 //@ts-ignore
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { Light } from "../../styles/colors";
+import { Light } from "../../shared/styles/colors";
 import { IconProp } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useLocation } from "react-router-dom";

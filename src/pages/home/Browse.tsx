@@ -4,7 +4,7 @@
 //@ts-ignore
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { Light } from "../../styles/colors";
+import { Light } from "../../shared/styles/colors";
 import Featured from "./components/Featured";
 import PlaylistsSection from "./components/PlaylistsSection";
 import Recommendation from "./components/Recommendation";

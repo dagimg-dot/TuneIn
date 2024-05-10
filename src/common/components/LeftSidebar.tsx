@@ -4,7 +4,7 @@
 //@ts-ignore
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { Light } from "../../styles/colors";
+import { Light } from "../../shared/styles/colors";
 import Tab from "./Tab";
 import { faGlobe, faHeart, faMusic } from "@fortawesome/free-solid-svg-icons";
 import { faHamburger } from "@fortawesome/free-solid-svg-icons/faHamburger";

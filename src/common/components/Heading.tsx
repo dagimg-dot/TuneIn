@@ -4,7 +4,7 @@
 //@ts-ignore
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { Light } from "../../styles/colors";
+import { Light } from "../../shared/styles/colors";
 
 export const HeadingContainer = styled.span`
   color: ${Light.textColor};
