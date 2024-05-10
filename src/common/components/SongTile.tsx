@@ -3,52 +3,15 @@
 
 //@ts-ignore
 import { jsx, css } from "@emotion/react";
-import { Light } from "../../styles/colors";
-import styled from "@emotion/styled";
 import { Song } from "../../shared/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
-
-const Tile = styled.div`
-  display: flex;
-  padding: 5px;
-  justify-content: space-between;
-  align-items: center;
-  transition: all 0.3s ease-in-out;
-  &:hover {
-    background-color: ${Light.tileHover};
-    border-radius: 5px;
-  }
-`;
-
-const AlbumArt = styled.img`
-  opacity: 1;
-  width: 80px;
-  height: 80px;
-  border-radius: 12px;
-  transition: 0.5s ease;
-  backface-visibility: hidden;
-`;
-
-const AlbumArtContainer = styled.div`
-  position: relative;
-  cursor: pointer;
-  &:hover img {
-    opacity: 0.3;
-  }
-  &:hover .middle {
-    opacity: 1;
-  }
-`;
-
-const PlayIcon = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  opacity: 0;
-  transition: 0.5s ease;
-`;
+import {
+  AlbumArt,
+  AlbumArtContainer,
+  PlayIcon,
+  Tile,
+} from "../../shared/styles/style";
 
 function SongTile({ artist, title, duration, image }: Song) {
   return (
@@ -61,7 +24,15 @@ function SongTile({ artist, title, duration, image }: Song) {
         }}
       >
         <AlbumArtContainer>
-          <AlbumArt src={image} alt="album art" />
+          <AlbumArt
+            src={image}
+            alt="album art"
+            css={{
+              width: "80px",
+              height: "80px",
+              gap: "20px",
+            }}
+          />
           <PlayIcon className="middle">
             <FontAwesomeIcon icon={faPlay} size="2x" />
           </PlayIcon>
