@@ -52,7 +52,11 @@ function Tracks() {
               <td>Title</td>
               <td>Genre</td>
               <td>Released Date</td>
-              <td>
+              <td
+                css={{
+                  textAlign: "center",
+                }}
+              >
                 <DurationIcon />
               </td>
             </TableRow>

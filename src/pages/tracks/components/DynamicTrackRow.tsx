@@ -47,7 +47,13 @@ function DynamicTrackRow({
       </Tile>
       <div>{genre}</div>
       <div>{releasedDate}</div>
-      <div>{duration}</div>
+      <div
+        css={{
+          textAlign: "center",
+        }}
+      >
+        {duration}
+      </div>
     </TableRow>
   );
 }
