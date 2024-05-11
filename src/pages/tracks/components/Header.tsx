@@ -64,6 +64,10 @@ function Header() {
             padding: "20px",
             borderRadius: "50%",
             cursor: "pointer",
+            transition: "all 0.2s ease-in-out",
+            "&:hover": {
+              scale: "1.1",
+            },
           }}
         >
           <FontAwesomeIcon icon={faAdd} color="black" size="lg" scale={1.1} />
