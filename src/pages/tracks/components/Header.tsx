@@ -6,6 +6,9 @@ import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { faAdd, faMusic } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Modal from "../../../common/components/Modal";
+import { useState } from "react";
+import TrackForm from "./TrackForm";
 
 const GradientContainer = styled.div`
   background: linear-gradient(to bottom, #20acfb, transparent);
@@ -13,7 +16,6 @@ const GradientContainer = styled.div`
   height: 25%;
   position: sticky;
   top: 0;
-  z-index: 99;
 `;
 
 const LeftFlexItem = styled.div`
@@ -23,8 +25,13 @@ const LeftFlexItem = styled.div`
 `;
 
 function Header() {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <GradientContainer>
+      <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
+        <TrackForm onClose={() => setIsOpen(false)} />
+      </Modal>
       <div
         css={{
           display: "flex",
@@ -69,6 +76,7 @@ function Header() {
               scale: "1.1",
             },
           }}
+          onClick={() => setIsOpen(true)}
         >
           <FontAwesomeIcon icon={faAdd} color="black" size="lg" scale={1.1} />
         </button>

@@ -53,3 +53,14 @@ export const PlayIcon = styled.div`
   opacity: 0;
   transition: 0.5s ease;
 `;
+
+export const FormButton = styled.button`
+  cursor: pointer;
+  margin-top: 20px;
+  outline: none;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 5px;
+  font-weight: bold;
+  font-size: 18px;
+`;
