@@ -19,7 +19,7 @@ const TrackListContainer = styled.div`
   padding-bottom: 80px;
 `;
 
-const TableRow = styled.th`
+const TableRow = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr 1.4fr 0.5fr;
   text-align: left;
@@ -38,7 +38,7 @@ function Tracks() {
       >
         <Utilities />
         <TrackListContainer>
-          <table
+          <div
             css={{
               width: "100%",
             }}
@@ -49,16 +49,16 @@ function Tracks() {
                 color: Light.textSecondary,
               }}
             >
-              <td>Title</td>
-              <td>Genre</td>
-              <td>Released Date</td>
-              <td
+              <div>Title</div>
+              <div>Genre</div>
+              <div>Released Date</div>
+              <div
                 css={{
                   textAlign: "center",
                 }}
               >
                 <DurationIcon />
-              </td>
+              </div>
             </TableRow>
             <div
               css={{
@@ -67,7 +67,7 @@ function Tracks() {
             >
               {/* All tracks are inserted here dynamically */}
             </div>
-          </table>
+          </div>
         </TrackListContainer>
       </div>
     </TracksContainer>
