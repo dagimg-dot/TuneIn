@@ -1,12 +1,13 @@
 import styled from "@emotion/styled";
-import { Song } from "../../shared/types";
+import { Track } from "../../shared/types";
 import {
   NextSongIcon,
   PlayPauseIcon,
   PreviousSongIcon,
 } from "../../common/components/CustomIcons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart, faVolumeHigh } from "@fortawesome/free-solid-svg-icons";
+import { faVolumeHigh } from "@fortawesome/free-solid-svg-icons";
+import { Heart } from "lucide-react";
 
 const Container = styled.div`
   color: white;
@@ -28,7 +29,7 @@ const InnerContainer = styled.div`
 `;
 
 interface PlayerProps {
-  songDetail: Song;
+  songDetail: Track;
 }
 
 function MainControl() {
@@ -51,7 +52,7 @@ function SecondaryControl() {
     <div css={{ display: "flex", gap: "15px", alignItems: "center" }}>
       <div>2:39 / 4:23</div>
       <div>
-        <FontAwesomeIcon icon={faHeart} size="lg" />
+        <Heart size={22} fill="white" />
       </div>
       <div>
         <FontAwesomeIcon icon={faVolumeHigh} size="lg" />
