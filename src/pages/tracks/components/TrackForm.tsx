@@ -2,6 +2,8 @@ import styled from "@emotion/styled";
 import { Light } from "../../../shared/styles/colors";
 import { X } from "lucide-react";
 import { FormButton } from "../../../shared/styles/style";
+import { Song } from "../../../shared/types";
+import { FormEvent, useState } from "react";
 
 const FormContainer = styled.div`
   display: flex;
@@ -11,7 +13,6 @@ const FormContainer = styled.div`
   border-radius: 15px;
   color: ${Light.textColor};
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);
-  min-width: 500px;
 `;
 
 const TextField = styled.input`
@@ -51,9 +52,32 @@ const CloseButton = styled.div`
 
 interface TrackFormProps {
   onClose: () => void;
+  _formData: Song;
 }
 
-const TrackForm = ({ onClose }: TrackFormProps) => {
+const TrackForm = ({ onClose, _formData }: TrackFormProps) => {
+  const [formData, setFormData] = useState({
+    title: _formData?.title || "",
+    artist: _formData?.artist || "",
+    genre: _formData?.genre || "",
+    releasedDate: _formData?.releasedDate || "",
+    duration: _formData?.duration || "",
+  });
+
+  const handleChange = (ev: { target: HTMLInputElement }) => {
+    const { name, value } = ev.target;
+
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (event: FormEvent) => {
+    event.preventDefault();
+    console.log(formData);
+  };
+
   return (
     <FormContainer>
       <FormHeader>
@@ -68,11 +92,52 @@ const TrackForm = ({ onClose }: TrackFormProps) => {
           <X color="#aaa" />
         </CloseButton>
       </FormHeader>
-      <TextField placeholder="Title" />
-      <TextField placeholder="Artist" />
-      <TextField placeholder="Genre" />
-      <TextField placeholder="Duration" />
-      <FormButton>Add Track</FormButton>
+      <form
+        onSubmit={handleSubmit}
+        css={{
+          maxWidth: "500px",
+        }}
+      >
+        <TextField
+          type="text"
+          name="title"
+          value={formData.title}
+          onChange={handleChange}
+          placeholder="Title"
+          required
+        />
+        <TextField
+          type="text"
+          name="artist"
+          value={formData.artist}
+          onChange={handleChange}
+          placeholder="Artist"
+          required
+        />
+        <TextField
+          type="text"
+          name="genre"
+          value={formData.genre}
+          onChange={handleChange}
+          placeholder="Genre"
+        />
+        <TextField
+          type="text"
+          name="releasedDate"
+          value={formData.releasedDate}
+          onChange={handleChange}
+          placeholder="Released Date"
+        />
+        <TextField
+          type="text"
+          name="duration"
+          value={formData.duration}
+          onChange={handleChange}
+          placeholder="Duration"
+          required
+        />
+        <FormButton>Add Track</FormButton>
+      </form>
     </FormContainer>
   );
 };
