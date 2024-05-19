@@ -13,6 +13,7 @@ const SongGrid = styled.div`
   grid-template-columns: 1fr 1fr;
   column-gap: 10px;
   row-gap: 5px;
+  padding-bottom: 70px;
 `;
 
 function Recommendation() {

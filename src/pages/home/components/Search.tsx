@@ -31,6 +31,7 @@ function Search() {
           backgroundColor: "transparent",
           color: Light.textColor,
           fontSize: "24px",
+          width: "100%"
         }}
       />
     </div>
