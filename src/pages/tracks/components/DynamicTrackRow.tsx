@@ -1,4 +1,4 @@
-import { Song } from "../../../shared/types";
+import { Track } from "../../../shared/types";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -16,7 +16,7 @@ function DynamicTrackRow({
   genre,
   image,
   releasedDate,
-}: Song) {
+}: Track) {
   return (
     <TableRow>
       <Tile>

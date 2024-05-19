@@ -1,13 +1,14 @@
-export interface Song {
+export interface Track {
+  id?: string;
   artist: string;
   title: string;
   duration: string;
   genre: string;
-  image: string;
+  image?: string;
   releasedDate: string;
 }
 
 export interface Playlist {
-    name: string,
-    noOfTrack: number,
+  name: string;
+  noOfTrack: number;
 }

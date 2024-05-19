@@ -3,7 +3,7 @@
 
 //@ts-ignore
 import { jsx, css } from "@emotion/react";
-import { Song } from "../../shared/types";
+import { Track } from "../../shared/types";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -13,7 +13,7 @@ import {
   Tile,
 } from "../../shared/styles/style";
 
-function SongTile({ artist, title, duration, image }: Song) {
+function SongTile({ artist, title, duration, image }: Track) {
   return (
     <Tile>
       <div

@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import rootReducer from "../reducers/rootReducer";
-import watchTrackActions from "../actions/trackActions";
+import { trackSaga } from "../actions/trackActions";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -11,6 +11,6 @@ const store = configureStore({
     getDefaultMiddleware().concat(sagaMiddleware),
 });
 
-sagaMiddleware.run(watchTrackActions);
+sagaMiddleware.run(trackSaga);
 
 export default store;
