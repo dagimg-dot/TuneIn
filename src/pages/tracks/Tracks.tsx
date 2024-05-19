@@ -3,6 +3,12 @@ import Header from "./components/Header";
 import Utilities from "./components/Utilities";
 import { DurationIcon } from "../../common/components/CustomIcons";
 import { Light } from "../../shared/styles/colors";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { Status, fetchTracks } from "../../redux/reducers/trackReducer";
+import DynamicTrackRow from "./components/DynamicTrackRow";
+import { Track } from "../../shared/types";
+import { GlobalState } from "../../redux/reducers/rootReducer";
 
 const TracksContainer = styled.div`
   display: flex;
@@ -28,6 +34,15 @@ const TableRow = styled.div`
 `;
 
 function Tracks() {
+  const { tracks, status, error } = useSelector<GlobalState>(
+    (state) => state.track
+  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTracks());
+  }, [dispatch]);
+
   return (
     <TracksContainer>
       <Header />
@@ -65,7 +80,15 @@ function Tracks() {
                 marginTop: "20px",
               }}
             >
-              {/* All tracks are inserted here dynamically */}
+              {status === Status.LOADING && "Loading"}
+              {status === Status.FAILED && "Can not fetch Tracks"}
+              {!error
+                ? tracks.map(
+                    (track: Track) =>
+                      track &&
+                      track.id && <DynamicTrackRow {...track} key={track.id} />
+                  )
+                : "Something went wrong"}
             </div>
           </div>
         </TrackListContainer>

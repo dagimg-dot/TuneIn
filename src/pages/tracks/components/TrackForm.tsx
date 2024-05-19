@@ -2,8 +2,11 @@ import styled from "@emotion/styled";
 import { Light } from "../../../shared/styles/colors";
 import { X } from "lucide-react";
 import { FormButton } from "../../../shared/styles/style";
-import { Song } from "../../../shared/types";
+import { Track } from "../../../shared/types";
 import { FormEvent, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { Status, createTrack } from "../../../redux/reducers/trackReducer";
+import { GlobalState } from "../../../redux/reducers/rootReducer";
 
 const FormContainer = styled.div`
   display: flex;
@@ -52,7 +55,7 @@ const CloseButton = styled.div`
 
 interface TrackFormProps {
   onClose: () => void;
-  _formData: Song;
+  _formData: Track;
 }
 
 const TrackForm = ({ onClose, _formData }: TrackFormProps) => {
@@ -63,6 +66,9 @@ const TrackForm = ({ onClose, _formData }: TrackFormProps) => {
     releasedDate: _formData?.releasedDate || "",
     duration: _formData?.duration || "",
   });
+
+  const status = useSelector<GlobalState>((state) => state.track.status);
+  const dispatch = useDispatch();
 
   const handleChange = (ev: { target: HTMLInputElement }) => {
     const { name, value } = ev.target;
@@ -76,6 +82,16 @@ const TrackForm = ({ onClose, _formData }: TrackFormProps) => {
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
     console.log(formData);
+
+    const newTrack = formData;
+    dispatch(createTrack(newTrack));
+    console.log(status);
+
+    if (status === Status.SUCCEEDED) {
+      console.log("Track added successfully");
+    }
+
+    onClose();
   };
 
   return (
@@ -136,7 +152,9 @@ const TrackForm = ({ onClose, _formData }: TrackFormProps) => {
           placeholder="Duration"
           required
         />
-        <FormButton>Add Track</FormButton>
+        <FormButton>
+          {status === Status.LOADING ? "Adding Track" : "Add Track"}
+        </FormButton>
       </form>
     </FormContainer>
   );
