@@ -78,7 +78,7 @@ function DynamicTrackRow({ track }: TrackRowProps) {
   };
 
   const handleDelete = () => {
-    dispatch(DeleteTrack(track.id));
+    dispatch(DeleteTrack(track.id!));
   };
 
   const handlePlay = () => {
