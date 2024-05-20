@@ -7,7 +7,7 @@ import SongTile from "../../../common/components/SongTile";
 import styled from "@emotion/styled";
 import Heading from "../../../common/components/Heading";
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Status, fetchTracks } from "../../../redux/reducers/trackReducer";
 import { Track } from "../../../shared/types";
 
@@ -21,14 +21,20 @@ const SongGrid = styled.div`
 
 function Recommendation() {
   //@ts-ignore
-  const { tracks, status, error } = useSelector<GlobalState>(
+  let { tracks, status, error, currentPlaying } = useSelector<GlobalState>(
     (state) => state.track
   );
+  const [recommendedTracks, setRecommendedTracks] = useState<Track[]>(tracks);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchTracks());
-  }, [dispatch]);
+    if (currentPlaying) {
+      setRecommendedTracks(
+        tracks.filter((track: Track) => track.genre === currentPlaying.genre)
+      );
+    }
+  }, [dispatch, currentPlaying]);
 
   return (
     <div>
@@ -37,7 +43,7 @@ function Recommendation() {
         {status === Status.LOADING && "Loading"}
         {status === Status.FAILED && "Can not fetch Tracks"}
         {!error
-          ? tracks.map(
+          ? recommendedTracks.map(
               (track: Track) =>
                 track && track.id && <SongTile track={track} key={track.id} />
             )
