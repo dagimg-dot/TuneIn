@@ -85,6 +85,11 @@ function DynamicTrackRow({ track }: TrackRowProps) {
     dispatch(setCurrentPlaying(track));
   };
 
+  const handleModalClose = () => {
+    setIsModalOpen(false);
+    setIsHovered(false);
+  };
+
   return (
     <TableRow
       onClick={() => setIsOpen(false)}
@@ -118,8 +123,8 @@ function DynamicTrackRow({ track }: TrackRowProps) {
           </UtilityContextItem>
         </UtilityContextContainer>
       </ContextMenu>
-      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
-        <TrackForm onClose={() => setIsModalOpen(false)} _formData={track} />
+      <Modal isOpen={isModalOpen} onClose={handleModalClose}>
+        <TrackForm onClose={handleModalClose} _formData={track} />
       </Modal>
       <Tile>
         <div
