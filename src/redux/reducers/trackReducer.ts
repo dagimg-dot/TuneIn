@@ -47,6 +47,38 @@ const trackSlice = createSlice({
       state.status = Status.FAILED;
       state.error = action.payload;
     },
+    EditTrackStart(state) {
+      state.status = Status.LOADING;
+    },
+    EditTrackSuccess(state, action) {
+      state.status = Status.SUCCEEDED;
+      const updatedTrack: Track = action.payload;
+      const index = state.tracks.findIndex(
+        (track) => track.id === updatedTrack.id
+      );
+      if (index !== -1) {
+        state.tracks[index] = updatedTrack;
+      }
+      state.status = Status.IDLE;
+    },
+    EditTrackFail(state, action) {
+      state.status = Status.FAILED;
+      state.error = action.payload;
+    },
+    DeleteTrackStart(state) {
+      state.status = Status.LOADING;
+    },
+    DeleteTrackSuccess(state, action) {
+      state.status = Status.SUCCEEDED;
+      state.tracks = state.tracks.filter(
+        (track) => track.id !== action.payload
+      );
+      state.status = Status.IDLE;
+    },
+    DeleteTrackFail(state, action) {
+      state.status = Status.FAILED;
+      state.error = action.payload;
+    },
   },
 });
 
@@ -57,6 +89,12 @@ export const {
   createTrackStart,
   createTrackSuccess,
   createTrackFail,
+  EditTrackStart,
+  EditTrackSuccess,
+  EditTrackFail,
+  DeleteTrackStart,
+  DeleteTrackSuccess,
+  DeleteTrackFail,
 } = trackSlice.actions;
 
 export const fetchTracks = () => ({ type: "track/fetchTracksSaga" });
@@ -64,6 +102,16 @@ export const fetchTracks = () => ({ type: "track/fetchTracksSaga" });
 export const createTrack = (track: Track) => ({
   type: "track/createTrackSaga",
   payload: track,
+});
+
+export const EditTrack = (track: Track) => ({
+  type: "track/EditTrackSaga",
+  payload: track,
+});
+
+export const DeleteTrack = (id: number) => ({
+  type: "track/DeleteTrackSaga",
+  payload: id,
 });
 
 export default trackSlice.reducer;

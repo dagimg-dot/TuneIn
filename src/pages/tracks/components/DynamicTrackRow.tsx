@@ -12,6 +12,10 @@ import { Edit2Icon, Heart, Plus, TrashIcon } from "lucide-react";
 import { useState } from "react";
 import ContextMenu from "../../../common/components/ContextMenu";
 import styled from "@emotion/styled";
+import TrackForm from "./TrackForm";
+import Modal from "../../../common/components/Modal";
+import { useDispatch } from "react-redux";
+import { DeleteTrack } from "../../../redux/reducers/trackReducer";
 
 const UtilityContextContainer = styled.div`
   background: linear-gradient(to right, #282828, #202020);
@@ -47,24 +51,21 @@ const HeartIcon = () => {
   );
 };
 
-function DynamicTrackRow({
-  id,
-  artist,
-  title,
-  duration,
-  genre,
-  image,
-  releasedDate,
-}: Track) {
+interface TrackRowProps {
+  track: Track;
+}
+
+function DynamicTrackRow({ track }: TrackRowProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [cordinate, setCordinate] = useState({ x: 0, y: 0 });
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const dispatch = useDispatch();
 
   const handleContextMenu = (ev: MouseEvent) => {
     ev.preventDefault();
     setIsOpen(true);
-    console.log(id);
-    console.log(cordinate);
   };
 
   const trackMouse = (ev: MouseEvent) => {
@@ -73,12 +74,18 @@ function DynamicTrackRow({
     }
   };
 
+  const handleDelete = () => {
+    dispatch(DeleteTrack(track.id));
+  };
+
   return (
     <TableRow
       onClick={() => setIsOpen(false)}
+      //@ts-ignore
       onMouseMove={trackMouse}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      //@ts-ignore
       onContextMenu={handleContextMenu}
     >
       <ContextMenu
@@ -90,11 +97,11 @@ function DynamicTrackRow({
         }}
       >
         <UtilityContextContainer>
-          <UtilityContextItem>
+          <UtilityContextItem onClick={() => setIsModalOpen(true)}>
             <Edit2Icon size={18} />
             <span>Edit</span>
           </UtilityContextItem>
-          <UtilityContextItem>
+          <UtilityContextItem onClick={handleDelete}>
             <TrashIcon size={18} />
             <span>Delete</span>
           </UtilityContextItem>
@@ -104,6 +111,9 @@ function DynamicTrackRow({
           </UtilityContextItem>
         </UtilityContextContainer>
       </ContextMenu>
+      <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
+        <TrackForm onClose={() => setIsModalOpen(false)} _formData={track} />
+      </Modal>
       <Tile>
         <div
           css={{
@@ -114,7 +124,7 @@ function DynamicTrackRow({
         >
           <AlbumArtContainer>
             <AlbumArt
-              src={image == undefined ? "/J.jpg" : image}
+              src={track.image == undefined ? "/J.jpg" : track.image}
               alt="album art"
             />
             <PlayIcon className="middle">
@@ -128,20 +138,20 @@ function DynamicTrackRow({
               gap: "5px",
             }}
           >
-            <span>{title}</span>
-            <span>{artist}</span>
+            <span>{track.title}</span>
+            <span>{track.artist}</span>
           </div>
         </div>
       </Tile>
-      <div>{genre}</div>
-      <div>{releasedDate}</div>
+      <div>{track.genre}</div>
+      <div>{track.releasedDate}</div>
       {!isHovered ? <div></div> : <HeartIcon />}
       <div
         css={{
           textAlign: "center",
         }}
       >
-        {duration}
+        {track.duration}
       </div>
     </TableRow>
   );

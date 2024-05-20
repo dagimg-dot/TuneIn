@@ -5,7 +5,11 @@ import { FormButton } from "../../../shared/styles/style";
 import { Track } from "../../../shared/types";
 import { FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Status, createTrack } from "../../../redux/reducers/trackReducer";
+import {
+  EditTrack,
+  Status,
+  createTrack,
+} from "../../../redux/reducers/trackReducer";
 import { GlobalState } from "../../../redux/reducers/rootReducer";
 
 const FormContainer = styled.div`
@@ -55,7 +59,7 @@ const CloseButton = styled.div`
 
 interface TrackFormProps {
   onClose: () => void;
-  _formData: Track;
+  _formData?: Track;
 }
 
 const TrackForm = ({ onClose, _formData }: TrackFormProps) => {
@@ -66,6 +70,7 @@ const TrackForm = ({ onClose, _formData }: TrackFormProps) => {
     releasedDate: _formData?.releasedDate || "",
     duration: _formData?.duration || "",
   });
+  const isEditMode = _formData?.id !== undefined;
 
   const status = useSelector<GlobalState>((state) => state.track.status);
   const dispatch = useDispatch();
@@ -81,13 +86,17 @@ const TrackForm = ({ onClose, _formData }: TrackFormProps) => {
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
-    console.log(formData);
 
     const newTrack = formData;
-    dispatch(createTrack(newTrack));
-    console.log(status);
+    if (isEditMode) {
+      dispatch(EditTrack({ id: _formData.id, ...newTrack }));
+    } else {
+      dispatch(createTrack(newTrack));
+    }
 
-    if (status === Status.SUCCEEDED) {
+    if (status === Status.SUCCEEDED && isEditMode) {
+      console.log("Track updated successfully");
+    } else if (status === Status.SUCCEEDED) {
       console.log("Track added successfully");
     }
 
@@ -102,7 +111,7 @@ const TrackForm = ({ onClose, _formData }: TrackFormProps) => {
             fontSize: "24px",
           }}
         >
-          Add New Track
+          {isEditMode ? "Update Track" : "Add New Track"}
         </span>
         <CloseButton onClick={onClose}>
           <X color="#aaa" />
@@ -153,7 +162,13 @@ const TrackForm = ({ onClose, _formData }: TrackFormProps) => {
           required
         />
         <FormButton>
-          {status === Status.LOADING ? "Adding Track" : "Add Track"}
+          {isEditMode
+            ? status === Status.LOADING
+              ? "Updating Track"
+              : "Update Track"
+            : status === Status.LOADING
+            ? "Adding Track"
+            : "Add Track"}
         </FormButton>
       </form>
     </FormContainer>

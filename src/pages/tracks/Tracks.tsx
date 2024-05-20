@@ -34,6 +34,7 @@ const TableRow = styled.div`
 `;
 
 function Tracks() {
+  //@ts-ignore
   const { tracks, status, error } = useSelector<GlobalState>(
     (state) => state.track
   );
@@ -87,7 +88,9 @@ function Tracks() {
                 ? tracks.map(
                     (track: Track) =>
                       track &&
-                      track.id && <DynamicTrackRow {...track} key={track.id} />
+                      track.id && (
+                        <DynamicTrackRow track={track} key={track.id} />
+                      )
                   )
                 : "Something went wrong"}
             </div>
