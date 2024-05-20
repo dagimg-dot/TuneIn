@@ -6,7 +6,10 @@ import { jsx, css } from "@emotion/react";
 import SongTile from "../../../common/components/SongTile";
 import styled from "@emotion/styled";
 import Heading from "../../../common/components/Heading";
-import { currentSong } from "../../../shared/data/songs";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { Status, fetchTracks } from "../../../redux/reducers/trackReducer";
+import { Track } from "../../../shared/types";
 
 const SongGrid = styled.div`
   display: grid;
@@ -17,18 +20,28 @@ const SongGrid = styled.div`
 `;
 
 function Recommendation() {
+  //@ts-ignore
+  const { tracks, status, error } = useSelector<GlobalState>(
+    (state) => state.track
+  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTracks());
+  }, [dispatch]);
+
   return (
     <div>
       <Heading title="You may also like" />
       <SongGrid>
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
+        {status === Status.LOADING && "Loading"}
+        {status === Status.FAILED && "Can not fetch Tracks"}
+        {!error
+          ? tracks.map(
+              (track: Track) =>
+                track && track.id && <SongTile track={track} key={track.id} />
+            )
+          : "Something went wrong"}
       </SongGrid>
     </div>
   );

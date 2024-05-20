@@ -4,10 +4,13 @@
 //@ts-ignore
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { currentSong } from "../../shared/data/songs";
 import Heading from "./Heading";
 import SongTile from "./SongTile";
 import { Light } from "../../shared/styles/colors";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { Status, fetchTracks } from "../../redux/reducers/trackReducer";
+import { Track } from "../../shared/types";
 
 const Container = styled.div`
   padding: 10px;
@@ -24,26 +27,29 @@ const SongList = styled.div`
 `;
 
 function RightSidebar() {
+  //@ts-ignore
+  const { tracks, status, error } = useSelector<GlobalState>(
+    (state) => state.track
+  );
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(fetchTracks());
+  }, [dispatch]);
+
   return (
     <Container>
       <div css={{ height: "100px" }}></div>
       <Heading title="Now playing" />
       <SongList>
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
-        <SongTile {...currentSong} />
+        {status === Status.LOADING && "Loading"}
+        {status === Status.FAILED && "Can not fetch Tracks"}
+        {!error
+          ? tracks.map(
+              (track: Track) =>
+                track && track.id && <SongTile track={track} key={track.id} />
+            )
+          : "Something went wrong"}
       </SongList>
     </Container>
   );

@@ -12,8 +12,20 @@ import {
   PlayIcon,
   Tile,
 } from "../../shared/styles/style";
+import { useDispatch } from "react-redux";
+import { setCurrentPlaying } from "../../redux/reducers/trackReducer";
 
-function SongTile({ artist, title, duration, image }: Track) {
+interface SongTileProps {
+  track: Track;
+}
+
+function SongTile({ track }: SongTileProps) {
+  const dispatch = useDispatch();
+
+  const handlePlay = () => {
+    dispatch(setCurrentPlaying(track));
+  };
+
   return (
     <Tile>
       <div
@@ -23,9 +35,9 @@ function SongTile({ artist, title, duration, image }: Track) {
           alignItems: "center",
         }}
       >
-        <AlbumArtContainer>
+        <AlbumArtContainer onClick={handlePlay}>
           <AlbumArt
-            src={image}
+            src={track.image == undefined ? "J.jpg" : track.image}
             alt="album art"
             css={{
               width: "80px",
@@ -44,11 +56,11 @@ function SongTile({ artist, title, duration, image }: Track) {
             gap: "10px",
           }}
         >
-          <span>{title}</span>
-          <span>{artist}</span>
+          <span>{track.title}</span>
+          <span>{track.artist}</span>
         </div>
       </div>
-      <div>{duration}</div>
+      <div>{track.duration}</div>
     </Tile>
   );
 }

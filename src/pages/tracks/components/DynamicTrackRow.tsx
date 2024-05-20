@@ -15,7 +15,10 @@ import styled from "@emotion/styled";
 import TrackForm from "./TrackForm";
 import Modal from "../../../common/components/Modal";
 import { useDispatch } from "react-redux";
-import { DeleteTrack } from "../../../redux/reducers/trackReducer";
+import {
+  DeleteTrack,
+  setCurrentPlaying,
+} from "../../../redux/reducers/trackReducer";
 
 const UtilityContextContainer = styled.div`
   background: linear-gradient(to right, #282828, #202020);
@@ -78,6 +81,10 @@ function DynamicTrackRow({ track }: TrackRowProps) {
     dispatch(DeleteTrack(track.id));
   };
 
+  const handlePlay = () => {
+    dispatch(setCurrentPlaying(track));
+  };
+
   return (
     <TableRow
       onClick={() => setIsOpen(false)}
@@ -122,7 +129,7 @@ function DynamicTrackRow({ track }: TrackRowProps) {
             alignItems: "center",
           }}
         >
-          <AlbumArtContainer>
+          <AlbumArtContainer onClick={handlePlay}>
             <AlbumArt
               src={track.image == undefined ? "/J.jpg" : track.image}
               alt="album art"
