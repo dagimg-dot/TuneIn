@@ -16,6 +16,7 @@ const GradientContainer = styled.div`
   height: 25%;
   position: sticky;
   top: 0;
+  z-index: 2;
 `;
 
 const LeftFlexItem = styled.div`

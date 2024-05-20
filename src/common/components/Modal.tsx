@@ -34,6 +34,7 @@ const Modal = ({ isOpen, onClose, children }: ModalProps) => {
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
+        zIndex: "2",
       }}
     >
       <div className="modal-content" onClick={(e) => e.stopPropagation()}>
