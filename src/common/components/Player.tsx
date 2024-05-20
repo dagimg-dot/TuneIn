@@ -8,6 +8,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeHigh } from "@fortawesome/free-solid-svg-icons";
 import { Heart } from "lucide-react";
+import { useSelector } from "react-redux";
 
 const Container = styled.div`
   color: white;
@@ -28,10 +29,6 @@ const InnerContainer = styled.div`
   padding: 0px 10px 0px 30px;
 `;
 
-interface PlayerProps {
-  songDetail: Track;
-}
-
 function MainControl() {
   return (
     <div
@@ -47,10 +44,14 @@ function MainControl() {
   );
 }
 
-function SecondaryControl() {
+interface SecondaryControlProps {
+  duration: string;
+}
+
+function SecondaryControl({ duration }: SecondaryControlProps) {
   return (
     <div css={{ display: "flex", gap: "15px", alignItems: "center" }}>
-      <div>2:39 / 4:23</div>
+      <div>{duration}</div>
       <div>
         <Heart size={22} fill="white" />
       </div>
@@ -69,7 +70,14 @@ function SecondaryControl() {
   );
 }
 
-function Player({ songDetail }: PlayerProps) {
+function Player() {
+  let songDetail: Track = useSelector((state) => state.track.currentPlaying);
+  3;
+
+  if (songDetail == null) {
+    return <div></div>;
+  }
+
   return (
     <Container>
       <input
@@ -88,7 +96,7 @@ function Player({ songDetail }: PlayerProps) {
           }}
         >
           <img
-            src={songDetail.image}
+            src={songDetail.image == undefined ? "/J.jpg" : songDetail.image}
             css={{
               width: "45px",
               height: "45px",
@@ -116,7 +124,7 @@ function Player({ songDetail }: PlayerProps) {
           <MainControl />
         </div>
         <div>
-          <SecondaryControl />
+          <SecondaryControl duration={songDetail.duration} />
         </div>
       </InnerContainer>
     </Container>

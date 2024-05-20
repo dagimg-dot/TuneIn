@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import LeftSidebar from "../common/components/LeftSidebar";
-import { currentSong } from "../shared/data/songs";
 import { Outlet } from "react-router";
 import Player from "../common/components/Player";
 import RightSidebar from "../common/components/RightSidebar";
@@ -29,7 +28,7 @@ function Default() {
       >
         <Outlet />
         <RightSidebar />
-        <Player songDetail={currentSong} />
+        <Player />
       </div>
     </HomeLayout>
   );

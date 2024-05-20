@@ -10,12 +10,14 @@ export enum Status {
 
 export interface TrackState {
   tracks: Track[];
+  currentPlaying: Track | null;
   status: Status;
   error: null;
 }
 
 const initialState: TrackState = {
   tracks: [],
+  currentPlaying: null,
   status: Status.IDLE,
   error: null,
 };
@@ -24,6 +26,9 @@ const trackSlice = createSlice({
   name: "track",
   initialState,
   reducers: {
+    setCurrentPlaying(state, action) {
+      state.currentPlaying = action.payload;
+    },
     fetchTracksStart(state) {
       state.status = Status.LOADING;
     },
@@ -83,6 +88,7 @@ const trackSlice = createSlice({
 });
 
 export const {
+  setCurrentPlaying,
   fetchTracksStart,
   fetchTracksSuccess,
   fetchTracksFail,
