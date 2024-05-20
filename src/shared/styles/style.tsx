@@ -1,9 +1,9 @@
 import { Light } from "./colors";
 import styled from "@emotion/styled";
 
-export const TableRow = styled.th`
+export const TableRow = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr 1.4fr 0.5fr;
+  grid-template-columns: 2fr 1fr 1.4fr 0.3fr 0.5fr;
   text-align: left;
   align-items: center;
   padding: 5px;
@@ -30,6 +30,7 @@ export const AlbumArt = styled.img`
   border-radius: 6px;
   transition: 0.5s ease;
   backface-visibility: hidden;
+  z-index: 0;
 `;
 
 export const AlbumArtContainer = styled.div`
@@ -63,4 +64,5 @@ export const FormButton = styled.button`
   border-radius: 5px;
   font-weight: bold;
   font-size: 18px;
+  width: 100%;
 `;

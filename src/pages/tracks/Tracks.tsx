@@ -27,7 +27,7 @@ const TrackListContainer = styled.div`
 
 const TableRow = styled.div`
   display: grid;
-  grid-template-columns: 2fr 1fr 1.4fr 0.5fr;
+  grid-template-columns: 2fr 1fr 1.4fr 0.3fr 0.5fr;
   text-align: left;
   padding: 10px;
   font-weight: 400;
@@ -67,6 +67,7 @@ function Tracks() {
               <div>Title</div>
               <div>Genre</div>
               <div>Released Date</div>
+              <div></div>
               <div
                 css={{
                   textAlign: "center",
