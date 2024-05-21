@@ -60,7 +60,7 @@ function PlaylistsHeader() {
             >
               Your Playlists
             </span>
-            {/* <span>24 tracks, 2 hr 4 min</span> */}
+            <span>24 playlists</span>
           </div>
         </LeftFlexItem>
         <button
