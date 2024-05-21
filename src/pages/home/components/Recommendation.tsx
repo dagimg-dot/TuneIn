@@ -36,7 +36,7 @@ function Recommendation() {
     } else {
       setRecommendedTracks(tracks);
     }
-  }, [dispatch, currentPlaying.genre]);
+  }, [dispatch, currentPlaying?.genre]);
 
   return (
     <div>
