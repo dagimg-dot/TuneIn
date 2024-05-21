@@ -1,6 +1,25 @@
 import { Light } from "./colors";
 import styled from "@emotion/styled";
 
+export const MainContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  color: ${Light.textColor};
+  overflow-y: auto;
+  height: 100dvh;
+`;
+
+export const DecorationBox = styled.div`
+  box-shadow: 0px 30px 64px -7px #0f1111;
+  background: linear-gradient(to bottom right, #0f72ac, white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px;
+  border-radius: 5px;
+`;
+
 export const TableRow = styled.div`
   cursor: pointer;
   display: grid;
