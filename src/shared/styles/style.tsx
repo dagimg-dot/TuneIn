@@ -2,6 +2,7 @@ import { Light } from "./colors";
 import styled from "@emotion/styled";
 
 export const TableRow = styled.div`
+  cursor: pointer;
   display: grid;
   grid-template-columns: 2fr 1fr 1.4fr 0.3fr 0.5fr;
   text-align: left;
