@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import Header from "./components/TracksHeader";
+import TrackHeader from "./components/TracksHeader";
 import Utilities from "./components/Utilities";
 import { DurationIcon } from "../../common/components/CustomIcons";
 import { Light } from "../../shared/styles/colors";
@@ -38,7 +38,7 @@ function Tracks() {
 
   return (
     <MainContainer>
-      <Header />
+      <TrackHeader />
       <div
         css={{
           height: "75%",
