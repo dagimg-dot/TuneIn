@@ -4,11 +4,11 @@
 //@ts-ignore
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
-import { faAdd, faMusic } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Modal from "../../../common/components/Modal";
 import { useState } from "react";
 import TrackForm from "./TrackForm";
+import { Music2, PlusIcon } from "lucide-react";
+import { DecorationBox } from "../../../shared/styles/style";
 
 const GradientContainer = styled.div`
   background: linear-gradient(to bottom, #20acfb, transparent);
@@ -25,7 +25,7 @@ const LeftFlexItem = styled.div`
   gap: 40px;
 `;
 
-function Header() {
+function TracksHeader() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -42,7 +42,9 @@ function Header() {
         }}
       >
         <LeftFlexItem>
-          <FontAwesomeIcon icon={faMusic} size="6x" />
+          <DecorationBox>
+            <Music2 size={50} />
+          </DecorationBox>
           <div
             css={{
               display: "flex",
@@ -58,7 +60,7 @@ function Header() {
             >
               All Tracks
             </span>
-            <span>24 songs, 2hr and 4min</span>
+            <span>24 tracks, 2 hr 4 min</span>
           </div>
         </LeftFlexItem>
         <button
@@ -69,7 +71,7 @@ function Header() {
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
-            padding: "20px",
+            padding: "15px",
             borderRadius: "50%",
             cursor: "pointer",
             transition: "all 0.2s ease-in-out",
@@ -79,11 +81,11 @@ function Header() {
           }}
           onClick={() => setIsOpen(true)}
         >
-          <FontAwesomeIcon icon={faAdd} color="black" size="lg" scale={1.1} />
+          <PlusIcon strokeWidth={3} size={28} />
         </button>
       </div>
     </GradientContainer>
   );
 }
 
-export default Header;
+export default TracksHeader;

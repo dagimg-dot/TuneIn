@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import Header from "./components/Header";
+import Header from "./components/TracksHeader";
 import Utilities from "./components/Utilities";
 import { DurationIcon } from "../../common/components/CustomIcons";
 import { Light } from "../../shared/styles/colors";
@@ -9,15 +9,7 @@ import { Status, fetchTracks } from "../../redux/reducers/trackReducer";
 import DynamicTrackRow from "./components/DynamicTrackRow";
 import { Track } from "../../shared/types";
 import { GlobalState } from "../../redux/reducers/rootReducer";
-
-const TracksContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 25px;
-  color: ${Light.textColor};
-  overflow-y: auto;
-  height: 100dvh;
-`;
+import { MainContainer } from "../../shared/styles/style";
 
 const TrackListContainer = styled.div`
   margin-top: 30px;
@@ -45,7 +37,7 @@ function Tracks() {
   }, [dispatch]);
 
   return (
-    <TracksContainer>
+    <MainContainer>
       <Header />
       <div
         css={{
@@ -97,7 +89,7 @@ function Tracks() {
           </div>
         </TrackListContainer>
       </div>
-    </TracksContainer>
+    </MainContainer>
   );
 }
 
