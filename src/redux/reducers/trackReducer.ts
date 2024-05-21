@@ -115,7 +115,7 @@ export const EditTrack = (track: Track) => ({
   payload: track,
 });
 
-export const DeleteTrack = (id: number | string) => ({
+export const DeleteTrack = (id: string) => ({
   type: "track/DeleteTrackSaga",
   payload: id,
 });
