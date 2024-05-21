@@ -2,6 +2,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import rootReducer from "../reducers/rootReducer";
 import { trackSaga } from "../actions/trackActions";
+import { playlistSaga } from "../actions/playlistActions";
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -12,5 +13,6 @@ const store = configureStore({
 });
 
 sagaMiddleware.run(trackSaga);
+sagaMiddleware.run(playlistSaga);
 
 export default store;
