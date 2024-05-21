@@ -8,7 +8,7 @@ import {
   TableRow,
   Tile,
 } from "../../../shared/styles/style";
-import { Edit2Icon, Heart, Plus, TrashIcon } from "lucide-react";
+import { Edit2Icon, Heart, MinusCircle, Plus } from "lucide-react";
 import { useState } from "react";
 import ContextMenu from "../../../common/components/ContextMenu";
 import styled from "@emotion/styled";
@@ -110,11 +110,11 @@ function DynamicTrackRow({ track }: TrackRowProps) {
       >
         <UtilityContextContainer>
           <UtilityContextItem onClick={() => setIsModalOpen(true)}>
-            <Edit2Icon size={18} />
+            <Edit2Icon size={16} />
             <span>Edit</span>
           </UtilityContextItem>
           <UtilityContextItem onClick={handleDelete}>
-            <TrashIcon size={18} />
+            <MinusCircle size={18} />
             <span>Delete</span>
           </UtilityContextItem>
           <UtilityContextItem>
@@ -157,7 +157,14 @@ function DynamicTrackRow({ track }: TrackRowProps) {
       </Tile>
       <div>{track.genre}</div>
       <div>{track.releasedDate}</div>
-      {!isHovered ? <div></div> : <HeartIcon />}
+      <div
+        css={{
+          opacity: isHovered ? 1 : 0,
+          transition: "all 0.3s ease-in-out",
+        }}
+      >
+        <HeartIcon />
+      </div>
       <div
         css={{
           textAlign: "center",
