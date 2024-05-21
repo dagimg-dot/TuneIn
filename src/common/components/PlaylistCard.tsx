@@ -83,7 +83,7 @@ function PlaylistCard({
     }
   };
 
-  const handleDelete = (ev: any) => {
+  const handleDelete = () => {
     dispatch(DeletePlaylist(playlist.id!));
   };
 

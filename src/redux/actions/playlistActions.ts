@@ -1,6 +1,8 @@
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
 import {
+  DeletePlaylistFail,
   DeletePlaylistStart,
+  DeletePlaylistSuccess,
   EditPlaylistFail,
   EditPlaylistStart,
   EditPlaylistSuccess,
@@ -59,10 +61,10 @@ const DeletePlaylistSaga = function* (action: any) {
     yield put(DeletePlaylistStart());
     const playlistId: Playlist = action.payload;
     yield call(deletePlaylist, playlistId);
-    yield put(EditPlaylistSuccess(playlistId));
+    yield put(DeletePlaylistSuccess(playlistId));
     // yield put(fetchPlaylists());
   } catch (error) {
-    yield put(EditPlaylistFail((error as Error).message));
+    yield put(DeletePlaylistFail((error as Error).message));
   }
 };
 
