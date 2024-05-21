@@ -6,9 +6,8 @@ import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { Light } from "../../shared/styles/colors";
 import Tab from "./Tab";
-import { faGlobe, faHeart, faMusic } from "@fortawesome/free-solid-svg-icons";
-import { faHamburger } from "@fortawesome/free-solid-svg-icons/faHamburger";
 import Logo from "./Logo";
+import { Globe, Heart, List, Music4 } from "lucide-react";
 
 const Container = styled.div`
   display: flex;
@@ -34,10 +33,10 @@ const LeftSidebar = () => {
           gap: "30px",
         }}
       >
-        <Tab title={"Browse"} navigateTo={"/"} icon={faGlobe} />
-        <Tab title={"Tracks"} navigateTo={"/tracks"} icon={faMusic} />
-        <Tab title={"Playlists"} navigateTo={"/plalists"} icon={faHamburger} />
-        <Tab title={"Favorites"} navigateTo={"/favorites"} icon={faHeart} />
+        <Tab title={"Browse"} navigateTo={"/"} icon={<Globe />} />
+        <Tab title={"Tracks"} navigateTo={"/tracks"} icon={<Music4 />} />
+        <Tab title={"Playlists"} navigateTo={"/playlists"} icon={<List />} />
+        <Tab title={"Favorites"} navigateTo={"/favorites"} icon={<Heart />} />
       </div>
       <div css={{ height: "100px" }}></div>
     </Container>

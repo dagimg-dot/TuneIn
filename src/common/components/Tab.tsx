@@ -5,14 +5,12 @@
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { Light } from "../../shared/styles/colors";
-import { IconProp } from "@fortawesome/fontawesome-svg-core";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link, useLocation } from "react-router-dom";
 
 interface TabProps {
   title: string;
   navigateTo: string;
-  icon: IconProp;
+  icon: React.ReactNode;
 }
 
 const StyledLink = styled(Link)`
@@ -35,7 +33,7 @@ function Tab({ title, navigateTo, icon }: TabProps) {
   };
   return (
     <StyledLink to={navigateTo}>
-      <FontAwesomeIcon icon={icon} />
+      {icon}
       <span
         css={{
           fontWeight: isActive(navigateTo) ? "bold" : "normal",

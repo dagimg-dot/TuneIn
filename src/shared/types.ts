@@ -9,6 +9,8 @@ export interface Track {
 }
 
 export interface Playlist {
+  id?: string;
   name: string;
-  noOfTrack: number;
+  count: number;
+  image?: string;
 }

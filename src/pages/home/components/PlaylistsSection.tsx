@@ -3,8 +3,8 @@
 
 //@ts-ignore
 import { jsx, css } from "@emotion/react";
-import PlaylistCard from "./PlaylistCard";
 import Heading from "../../../common/components/Heading";
+import PlaylistCard from "../../../common/components/PlaylistCard";
 
 function PlaylistsSection() {
   return (
@@ -18,22 +18,24 @@ function PlaylistsSection() {
           overflowY: "hidden",
         }}
       >
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
-        <PlaylistCard />
+        <PlaylistCard playlist={{ name: "DejaVu", count: 30 }} />
+        <PlaylistCard playlist={{ name: "DejaVu", count: 30 }} />
+        <PlaylistCard playlist={{ name: "DejaVu", count: 30 }} />
+        <PlaylistCard playlist={{ name: "DejaVu", count: 30 }} />
+        <PlaylistCard playlist={{ name: "DejaVu", count: 30 }} />
+        <PlaylistCard playlist={{ name: "DejaVu", count: 30 }} />
+        <PlaylistCard playlist={{ name: "DejaVu", count: 30 }} />
+        <PlaylistCard playlist={{ name: "DejaVu", count: 30 }} />
+        <PlaylistCard playlist={{ name: "DejaVu", count: 30 }} />
+        <PlaylistCard playlist={{ name: "DejaVu", count: 30 }} />
+        <PlaylistCard playlist={{ name: "DejaVu", count: 30 }} />
+        <PlaylistCard playlist={{ name: "DejaVu", count: 30 }} />
+        <PlaylistCard playlist={{ name: "DejaVu", count: 30 }} />
+        <PlaylistCard playlist={{ name: "DejaVu", count: 30 }} />
+        <PlaylistCard playlist={{ name: "DejaVu", count: 30 }} />
+        <PlaylistCard playlist={{ name: "DejaVu", count: 30 }} />
+        <PlaylistCard playlist={{ name: "DejaVu", count: 30 }} />
+        <PlaylistCard playlist={{ name: "DejaVu", count: 30 }} />
       </div>
     </div>
   );
