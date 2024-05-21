@@ -9,6 +9,9 @@ import { useState } from "react";
 import { Playlist } from "../../shared/types";
 import ContextMenu from "./ContextMenu";
 import Modal from "./Modal";
+import PlaylistForm from "../../pages/playlist/components/PlaylistForm";
+import { useDispatch } from "react-redux";
+import { DeletePlaylist } from "../../redux/reducers/playlistReducer";
 
 const CardBox = styled.div`
   position: relative;
@@ -67,6 +70,8 @@ function PlaylistCard({
   const [cordinate, setCordinate] = useState({ x: 0, y: 0 });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const dispatch = useDispatch();
+
   const handleContextMenu = (ev: MouseEvent) => {
     ev.preventDefault();
     setIsOpen(true);
@@ -79,7 +84,7 @@ function PlaylistCard({
   };
 
   const handleDelete = (ev: any) => {
-    throw new Error("Function not implemented.");
+    dispatch(DeletePlaylist(playlist.id!));
   };
 
   const handleModalClose = () => {
@@ -90,7 +95,7 @@ function PlaylistCard({
   return (
     <div>
       <Modal isOpen={isModalOpen} onClose={handleModalClose}>
-        edit
+        <PlaylistForm onClose={handleModalClose} _formData={playlist} />
       </Modal>
       <CardBox
         onClick={() => setIsOpen(false)}

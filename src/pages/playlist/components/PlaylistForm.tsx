@@ -6,6 +6,11 @@ import { Playlist } from "../../../shared/types";
 import { FormEvent, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Status } from "../../../redux/reducers/trackReducer";
+import randomIdGenerator from "../../../utils/idGenerator";
+import {
+  EditPlaylist,
+  createPlaylist,
+} from "../../../redux/reducers/playlistReducer";
 
 const FormContainer = styled.div`
   display: flex;
@@ -52,19 +57,20 @@ const CloseButton = styled.div`
   }
 `;
 
-interface TrackFormProps {
+interface PlaylistFormProps {
   onClose: () => void;
   _formData?: Playlist;
 }
 
-const PlaylistForm = ({ onClose, _formData }: TrackFormProps) => {
+const PlaylistForm = ({ onClose, _formData }: PlaylistFormProps) => {
   const [formData, setFormData] = useState({
     name: _formData?.name || "",
   });
 
   const isEditMode = _formData?.id !== undefined;
 
-  const status = useSelector((state) => state.track.status);
+  //@ts-ignore
+  const status = useSelector((state) => state.playlist.status);
   const dispatch = useDispatch();
 
   const handleChange = (ev: { target: HTMLInputElement }) => {
@@ -80,11 +86,11 @@ const PlaylistForm = ({ onClose, _formData }: TrackFormProps) => {
     event.preventDefault();
 
     const newTrack = formData;
-    // if (isEditMode) {
-    //   dispatch(EditTrack({ id: _formData.id, ...newTrack }));
-    // } else {
-    //   dispatch(createTrack(newTrack));
-    // }
+    if (isEditMode) {
+      dispatch(EditPlaylist({ id: _formData.id, ...newTrack }));
+    } else {
+      dispatch(createPlaylist({ id: randomIdGenerator(), ...formData }));
+    }
 
     if (status === Status.SUCCEEDED && isEditMode) {
       console.log("Track updated successfully");
