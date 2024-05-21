@@ -24,7 +24,7 @@ function Recommendation() {
   let { tracks, status, error, currentPlaying } = useSelector<GlobalState>(
     (state) => state.track
   );
-  const [recommendedTracks, setRecommendedTracks] = useState<Track[]>(tracks);
+  const [recommendedTracks, setRecommendedTracks] = useState<Track[]>([]);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -33,6 +33,8 @@ function Recommendation() {
       setRecommendedTracks(
         tracks.filter((track: Track) => track.genre === currentPlaying.genre)
       );
+    } else {
+      setRecommendedTracks(tracks);
     }
   }, [dispatch, currentPlaying]);
 
@@ -43,10 +45,15 @@ function Recommendation() {
         {status === Status.LOADING && "Loading"}
         {status === Status.FAILED && "Can not fetch Tracks"}
         {!error
-          ? recommendedTracks.map(
-              (track: Track) =>
-                track && track.id && <SongTile track={track} key={track.id} />
-            )
+          ? currentPlaying
+            ? recommendedTracks.map(
+                (track: Track) =>
+                  track && track.id && <SongTile track={track} key={track.id} />
+              )
+            : tracks.map(
+                (track: Track) =>
+                  track && track.id && <SongTile track={track} key={track.id} />
+              )
           : "Something went wrong"}
       </SongGrid>
     </div>
