@@ -24,21 +24,23 @@ const ListenBtn = styled.button`
   cursor: pointer;
 `;
 
+const FeaturedContainer = styled.div`
+  border-radius: 20px;
+  min-height: 300px;
+  background: linear-gradient(to right, #3b5c39, #456842);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: -5px 5px 64px -7px #0f1111;
+
+`;
+
 function Featured() {
   return (
     <div>
       <Heading title="Featured" />
-      <div
-        css={{
-          borderRadius: "20px",
-          minHeight: "300px",
-          background: "linear-gradient(to right, #3B5C39, #456842)",
-          padding: "20px",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "space-between",
-        }}
-      >
+      <FeaturedContainer>
         <div
           css={{
             display: "flex",
@@ -68,7 +70,7 @@ function Featured() {
             <span>Listen now</span>
           </ListenBtn>
         </div>
-      </div>
+      </FeaturedContainer>
     </div>
   );
 }
