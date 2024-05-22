@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { Status, fetchTracks } from "../../redux/reducers/trackReducer";
 import { Track } from "../../shared/types";
+import { GlobalState } from "../../redux/reducers/rootReducer";
 
 const Container = styled.div`
   padding: 10px;
@@ -27,9 +28,8 @@ const SongList = styled.div`
 `;
 
 function RightSidebar() {
-  //@ts-ignore
-  const { tracks, status, error } = useSelector<GlobalState>(
-    (state) => state.track
+  const { tracks, status, error } = useSelector(
+    (state: GlobalState) => state.track
   );
   const dispatch = useDispatch();
 

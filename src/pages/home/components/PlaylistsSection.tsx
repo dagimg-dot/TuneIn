@@ -10,10 +10,10 @@ import { useSelector, useDispatch } from "react-redux";
 import { fetchPlaylists } from "../../../redux/reducers/playlistReducer";
 import { Status } from "../../../redux/reducers/trackReducer";
 import { Playlist } from "../../../shared/types";
+import { GlobalState } from "../../../redux/reducers/rootReducer";
 
 function PlaylistsSection() {
-  //@ts-ignore
-  const { playlists, status, error } = useSelector((state) => state.playlist);
+  const { playlists, status, error } = useSelector((state: GlobalState) => state.playlist);
   const dispatch = useDispatch();
 
   useEffect(() => {

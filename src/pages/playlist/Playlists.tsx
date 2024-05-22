@@ -7,6 +7,7 @@ import styled from "@emotion/styled";
 import { Playlist } from "../../shared/types";
 import { useDispatch, useSelector } from "react-redux";
 import { Status, fetchPlaylists } from "../../redux/reducers/playlistReducer";
+import { GlobalState } from "../../redux/reducers/rootReducer";
 
 const PlayListContainer = styled.div`
   padding: 0 30px;
@@ -20,8 +21,9 @@ const PlayListContainer = styled.div`
 `;
 
 function Playlists() {
-  //@ts-ignore
-  const { playlists, status, error } = useSelector((state) => state.playlist);
+  const { playlists, status, error } = useSelector(
+    (state: GlobalState) => state.playlist
+  );
   const dispatch = useDispatch();
 
   useEffect(() => {

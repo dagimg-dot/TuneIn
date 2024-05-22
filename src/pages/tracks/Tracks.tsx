@@ -26,9 +26,8 @@ const TableRow = styled.div`
 `;
 
 function Tracks() {
-  //@ts-ignore
-  const { tracks, status, error } = useSelector<GlobalState>(
-    (state) => state.track
+  const { tracks, status, error } = useSelector(
+    (state: GlobalState) => state.track
   );
   const dispatch = useDispatch();
 

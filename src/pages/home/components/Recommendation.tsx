@@ -10,6 +10,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { Status, fetchTracks } from "../../../redux/reducers/trackReducer";
 import { Track } from "../../../shared/types";
+import { GlobalState } from "../../../redux/reducers/rootReducer";
 
 const SongGrid = styled.div`
   display: grid;
@@ -20,9 +21,8 @@ const SongGrid = styled.div`
 `;
 
 function Recommendation() {
-  //@ts-ignore
-  let { tracks, status, error, currentPlaying } = useSelector<GlobalState>(
-    (state) => state.track
+  let { tracks, status, error, currentPlaying } = useSelector(
+    (state: GlobalState) => state.track
   );
   const [recommendedTracks, setRecommendedTracks] = useState<Track[]>([]);
   const dispatch = useDispatch();

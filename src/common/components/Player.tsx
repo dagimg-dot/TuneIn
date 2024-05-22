@@ -9,6 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faVolumeHigh } from "@fortawesome/free-solid-svg-icons";
 import { Heart } from "lucide-react";
 import { useSelector } from "react-redux";
+import { GlobalState } from "../../redux/reducers/rootReducer";
 
 const Container = styled.div`
   color: white;
@@ -71,7 +72,7 @@ function SecondaryControl({ duration }: SecondaryControlProps) {
 }
 
 function Player() {
-  let songDetail: Track = useSelector((state) => state.track.currentPlaying);
+  let songDetail: Track = useSelector((state: GlobalState) => state.track.currentPlaying);
   3;
 
   if (songDetail == null) {
