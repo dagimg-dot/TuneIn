@@ -15,7 +15,6 @@ const PlayListContainer = styled.div`
   margin-top: 30px;
   padding-bottom: 80px;
   display: flex;
-  justify-content: safe;
   flex-wrap: wrap;
   gap: 40px;
 `;
@@ -42,19 +41,32 @@ function Playlists() {
         <PlayListContainer>
           {status === Status.LOADING && "Loading"}
           {status === Status.FAILED && "Can not fetch Playlists"}
-          {!error
-            ? playlists.map(
+          {!error ? (
+            playlists.length == 0 ? (
+              <span
+                css={{
+                  fontSize: "18px",
+                  margin: "0 auto",
+                }}
+              >
+                There are no playlists to be shown
+              </span>
+            ) : (
+              playlists.map(
                 (playlist: Playlist) =>
                   playlist &&
                   playlist.id && (
                     <PlaylistCard
                       playlist={playlist}
-                      isContextMenuEnabled={true}
                       key={playlist.id}
+                      isContextMenuEnabled={true}
                     />
                   )
               )
-            : "Something went wrong"}
+            )
+          ) : (
+            "Something went wrong"
+          )}
         </PlayListContainer>
       </div>
     </MainContainer>
