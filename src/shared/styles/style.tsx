@@ -31,7 +31,7 @@ export const TableRow = styled.div`
   transition: all 0.3s ease-in-out;
   &:hover {
     background-color: ${Light.tileHover};
-    border-radius: 5px;
+    border-radius: 10px;
   }
 `;
 
