@@ -6,7 +6,6 @@ import {
   AlbumArtContainer,
   PlayIcon,
   TableRow,
-  Tile,
 } from "../../../shared/styles/style";
 import { Edit2Icon, Heart, MinusCircle, Plus } from "lucide-react";
 import { useState } from "react";
@@ -41,6 +40,14 @@ const UtilityContextItem = styled.div`
   &:hover {
     background-color: #333333;
   }
+`;
+
+const BasicInfoContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: all 0.3s ease-in-out;
+  padding: 5px;
 `;
 
 const HeartIcon = () => {
@@ -139,7 +146,7 @@ function DynamicTrackRow({ track }: TrackRowProps) {
       <Modal isOpen={isModalOpen} onClose={handleModalClose}>
         <TrackForm onClose={handleModalClose} _formData={track} />
       </Modal>
-      <Tile>
+      <BasicInfoContainer>
         <div
           css={{
             display: "flex",
@@ -167,7 +174,7 @@ function DynamicTrackRow({ track }: TrackRowProps) {
             <span>{track.artist}</span>
           </div>
         </div>
-      </Tile>
+      </BasicInfoContainer>
       <div>{track.genre}</div>
       <div>{track.releasedDate}</div>
       <div
