@@ -11,6 +11,7 @@ import {
   createTrack,
 } from "../../../redux/reducers/trackReducer";
 import { GlobalState } from "../../../redux/reducers/rootReducer";
+import toast from "react-hot-toast";
 
 const FormContainer = styled.div`
   display: flex;
@@ -72,7 +73,7 @@ const TrackForm = ({ onClose, _formData }: TrackFormProps) => {
   });
   const isEditMode = _formData?.id !== undefined;
 
-  const status = useSelector<GlobalState>((state) => state.track.status);
+  const status = useSelector((state: GlobalState) => state.track.status);
   const dispatch = useDispatch();
 
   const handleChange = (ev: { target: HTMLInputElement }) => {
@@ -95,9 +96,9 @@ const TrackForm = ({ onClose, _formData }: TrackFormProps) => {
     }
 
     if (status === Status.SUCCEEDED && isEditMode) {
-      console.log("Track updated successfully");
+      toast.success("Track Updated Successfully ");
     } else if (status === Status.SUCCEEDED) {
-      console.log("Track added successfully");
+      toast.success("Track added successfully");
     }
 
     onClose();

@@ -14,11 +14,14 @@ import ContextMenu from "../../../common/components/ContextMenu";
 import styled from "@emotion/styled";
 import TrackForm from "./TrackForm";
 import Modal from "../../../common/components/Modal";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   DeleteTrack,
+  Status,
   setCurrentPlaying,
 } from "../../../redux/reducers/trackReducer";
+import toast from "react-hot-toast";
+import { GlobalState } from "../../../redux/reducers/rootReducer";
 
 const UtilityContextContainer = styled.div`
   background: linear-gradient(to right, #282828, #202020);
@@ -64,6 +67,8 @@ function DynamicTrackRow({ track }: TrackRowProps) {
   const [cordinate, setCordinate] = useState({ x: 0, y: 0 });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const status = useSelector((state: GlobalState) => state.track.status);
+
   const dispatch = useDispatch();
 
   const handleContextMenu = (ev: MouseEvent) => {
@@ -79,6 +84,10 @@ function DynamicTrackRow({ track }: TrackRowProps) {
 
   const handleDelete = () => {
     dispatch(DeleteTrack(track.id!));
+
+    if (status == Status.SUCCEEDED) {
+      toast.success("Track Deleted Successfully");
+    }
   };
 
   const handlePlay = () => {

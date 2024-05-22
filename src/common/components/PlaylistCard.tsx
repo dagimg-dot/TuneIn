@@ -10,8 +10,10 @@ import { Playlist } from "../../shared/types";
 import ContextMenu from "./ContextMenu";
 import Modal from "./Modal";
 import PlaylistForm from "../../pages/playlist/components/PlaylistForm";
-import { useDispatch } from "react-redux";
-import { DeletePlaylist } from "../../redux/reducers/playlistReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { DeletePlaylist, Status } from "../../redux/reducers/playlistReducer";
+import { GlobalState } from "../../redux/reducers/rootReducer";
+import toast from "react-hot-toast";
 
 const CardBox = styled.div`
   position: relative;
@@ -70,6 +72,7 @@ function PlaylistCard({
   const [cordinate, setCordinate] = useState({ x: 0, y: 0 });
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const status = useSelector((state: GlobalState) => state.playlist.status);
   const dispatch = useDispatch();
 
   const handleContextMenu = (ev: MouseEvent) => {
@@ -85,6 +88,14 @@ function PlaylistCard({
 
   const handleDelete = () => {
     dispatch(DeletePlaylist(playlist.id!));
+
+    if (status == Status.SUCCEEDED) {
+      toast.success("Playlist Deleted Successfully");
+    }
+
+    if (status == Status.FAILED) {
+      toast.error("Failed to delete playlist");
+    }
   };
 
   const handleModalClose = () => {

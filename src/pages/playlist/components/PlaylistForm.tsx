@@ -11,6 +11,8 @@ import {
   EditPlaylist,
   createPlaylist,
 } from "../../../redux/reducers/playlistReducer";
+import toast from "react-hot-toast";
+import { GlobalState } from "../../../redux/reducers/rootReducer";
 
 const FormContainer = styled.div`
   display: flex;
@@ -69,8 +71,7 @@ const PlaylistForm = ({ onClose, _formData }: PlaylistFormProps) => {
 
   const isEditMode = _formData?.id !== undefined;
 
-  //@ts-ignore
-  const status = useSelector((state) => state.playlist.status);
+  const status = useSelector((state: GlobalState) => state.playlist.status);
   const dispatch = useDispatch();
 
   const handleChange = (ev: { target: HTMLInputElement }) => {
@@ -93,9 +94,10 @@ const PlaylistForm = ({ onClose, _formData }: PlaylistFormProps) => {
     }
 
     if (status === Status.SUCCEEDED && isEditMode) {
-      console.log("Track updated successfully");
+      console.log("edited successfully");
+      toast.success("Playlist Updated Successfully");
     } else if (status === Status.SUCCEEDED) {
-      console.log("Track added successfully");
+      toast.success("Playlist Added Successfully");
     }
 
     onClose();
