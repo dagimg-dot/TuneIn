@@ -88,6 +88,10 @@ function DynamicTrackRow({ track }: TrackRowProps) {
     if (status == Status.SUCCEEDED) {
       toast.success("Track Deleted Successfully");
     }
+
+    if (status == Status.FAILED) {
+      toast.error("Failed to delete playlist");
+    }
   };
 
   const handlePlay = () => {
