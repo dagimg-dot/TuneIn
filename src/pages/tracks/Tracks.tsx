@@ -21,7 +21,7 @@ const TableRow = styled.div`
   display: grid;
   grid-template-columns: 2fr 1fr 1.4fr 0.3fr 0.5fr;
   text-align: left;
-  padding: 10px;
+  padding: 10px 0 10px 5px;
   font-weight: 400;
 `;
 
