@@ -30,6 +30,7 @@ function PlaylistsSection() {
           gap: "20px",
           overflowX: "auto",
           overflowY: "hidden",
+          padding: "5px"
         }}
       >
         {status === Status.LOADING && "Loading"}
