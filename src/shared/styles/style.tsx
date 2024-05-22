@@ -26,7 +26,6 @@ export const TableRow = styled.div`
   grid-template-columns: 2fr 1fr 1.4fr 0.3fr 0.5fr;
   text-align: left;
   align-items: center;
-  padding: 5px;
   font-weight: 400;
   margin-bottom: 10px;
   transition: all 0.3s ease-in-out;
@@ -41,6 +40,11 @@ export const Tile = styled.div`
   justify-content: space-between;
   align-items: center;
   transition: all 0.3s ease-in-out;
+  padding: 5px;
+  &:hover {
+    background-color: ${Light.tileHover};
+    border-radius: 10px;
+  }
 `;
 
 export const AlbumArt = styled.img`
