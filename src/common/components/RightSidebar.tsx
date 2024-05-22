@@ -23,7 +23,7 @@ const Container = styled.div`
 const SongList = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 5px;
   padding-bottom: 80px;
 `;
 
