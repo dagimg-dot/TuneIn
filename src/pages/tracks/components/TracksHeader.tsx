@@ -5,10 +5,12 @@
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Modal from "../../../common/components/Modal";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import TrackForm from "./TrackForm";
 import { Music2, PlusIcon } from "lucide-react";
 import { DecorationBox } from "../../../shared/styles/style";
+import { useSelector } from "react-redux";
+import { GlobalState } from "../../../redux/reducers/rootReducer";
 
 const GradientContainer = styled.div`
   background: linear-gradient(to bottom, #20acfb, transparent);
@@ -27,6 +29,12 @@ const LeftFlexItem = styled.div`
 
 function TracksHeader() {
   const [isOpen, setIsOpen] = useState(false);
+  const { tracks } = useSelector((state: GlobalState) => state.track);
+  const [trackCount, setTrackCount] = useState(tracks.length);
+
+  useMemo(() => {
+    setTrackCount(tracks.length);
+  }, [tracks.length]);
 
   return (
     <GradientContainer>
@@ -60,7 +68,13 @@ function TracksHeader() {
             >
               All Tracks
             </span>
-            <span>24 tracks, 2 hr 4 min</span>
+            <span>
+              {trackCount +
+                `${
+                  trackCount == 1 || trackCount == 0 ? " track" : " tracks"
+                }`}{" "}
+              , 2 hr 4 min
+            </span>
           </div>
         </LeftFlexItem>
         <button

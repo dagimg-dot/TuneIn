@@ -5,10 +5,12 @@
 import { jsx, css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Modal from "../../../common/components/Modal";
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import { List, PlusIcon } from "lucide-react";
 import { DecorationBox } from "../../../shared/styles/style";
 import PlaylistForm from "./PlaylistForm";
+import { GlobalState } from "../../../redux/reducers/rootReducer";
+import { useSelector } from "react-redux";
 
 const GradientContainer = styled.div`
   background: linear-gradient(to bottom, #20acfb, transparent);
@@ -27,6 +29,12 @@ const LeftFlexItem = styled.div`
 
 function PlaylistsHeader() {
   const [isOpen, setIsOpen] = useState(false);
+  const { playlists } = useSelector((state: GlobalState) => state.playlist);
+  const [playlistCount, setPlaylistCount] = useState(playlists.length);
+
+  useMemo(() => {
+    setPlaylistCount(playlists.length);
+  }, [playlists.length]);
 
   return (
     <GradientContainer>
@@ -60,7 +68,10 @@ function PlaylistsHeader() {
             >
               Your Playlists
             </span>
-            <span>24 playlists</span>
+            <span>
+              {playlistCount +
+                `${playlistCount == 1 || playlistCount == 0 ? " playlist" : " playlists"}`}{" "}
+            </span>
           </div>
         </LeftFlexItem>
         <button
