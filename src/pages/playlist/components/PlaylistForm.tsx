@@ -90,11 +90,12 @@ const PlaylistForm = ({ onClose, _formData }: PlaylistFormProps) => {
     if (isEditMode) {
       dispatch(EditPlaylist({ id: _formData.id, ...newTrack }));
     } else {
-      dispatch(createPlaylist({ id: randomIdGenerator(), ...formData }));
+      dispatch(
+        createPlaylist({ id: randomIdGenerator(), count: 0, ...formData })
+      );
     }
 
     if (status === Status.SUCCEEDED && isEditMode) {
-      console.log("edited successfully");
       toast.success("Playlist Updated Successfully");
     } else if (status === Status.SUCCEEDED) {
       toast.success("Playlist Added Successfully");
