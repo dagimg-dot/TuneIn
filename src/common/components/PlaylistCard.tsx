@@ -23,6 +23,10 @@ const CardBox = styled.div`
   height: 170px;
   width: 170px;
   cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  &:hover {
+    scale: 1.05;
+  }
 `;
 
 const CardOverlay = styled.div`
@@ -118,7 +122,13 @@ function PlaylistCard({
         onContextMenu={handleContextMenu}
       >
         <CardOverlay>
-          <span>{playlist.name}</span>
+          <span
+            css={{
+              fontWeight: "500",
+            }}
+          >
+            {playlist.name}
+          </span>
           <div
             css={{
               display: "flex",
@@ -126,7 +136,9 @@ function PlaylistCard({
               alignItems: "center",
             }}
           >
-            <span>{playlist.count} Tracks</span>
+            <span>
+              <strong>{playlist.count}</strong> Tracks
+            </span>
             <div
               css={{
                 opacity: isHovered ? 1 : 0,
