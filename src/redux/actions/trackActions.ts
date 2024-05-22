@@ -51,7 +51,7 @@ const EditTrackSaga = function* (action: any) {
     const track: Track = action.payload;
     const response = yield call(updateTrack, track);
     yield put(EditTrackSuccess(response));
-    // yield put(fetchTracks());
+    yield put(fetchTracks());
   } catch (error) {
     yield put(EditTrackFail((error as Error).message));
   }
@@ -63,7 +63,7 @@ const DeleteTrackSaga = function* (action: any) {
     const trackId = action.payload;
     yield call(deleteTrack, trackId);
     yield put(DeleteTrackSuccess(trackId));
-    // yield put(fetchTracks());
+    yield put(fetchTracks());
   } catch (error) {
     yield put(DeleteTrackFail((error as Error).message));
   }

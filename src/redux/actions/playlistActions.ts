@@ -50,7 +50,7 @@ const EditPlaylistSaga = function* (action: any) {
     const playlist: Playlist = action.payload;
     const response = yield call(updatePlaylist, playlist);
     yield put(EditPlaylistSuccess(response));
-    // yield put(fetchPlaylists());
+    yield put(fetchPlaylists());
   } catch (error) {
     yield put(EditPlaylistFail((error as Error).message));
   }
@@ -62,7 +62,7 @@ const DeletePlaylistSaga = function* (action: any) {
     const playlistId: Playlist = action.payload;
     yield call(deletePlaylist, playlistId);
     yield put(DeletePlaylistSuccess(playlistId));
-    // yield put(fetchPlaylists());
+    yield put(fetchPlaylists());
   } catch (error) {
     yield put(DeletePlaylistFail((error as Error).message));
   }
