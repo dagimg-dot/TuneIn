@@ -30,7 +30,7 @@ const CardOverlay = styled.div`
   justify-content: space-between;
   height: 100%;
   color: white;
-  padding: 18px;
+  padding: 15px;
   font-size: 18px;
   font-weight: "600";
   width: 100%;
@@ -127,7 +127,7 @@ function PlaylistCard({
                 padding: "10px",
               }}
             >
-              <Play fill="black" stroke="black" size={10} />
+              <Play fill="black" stroke="black" size={15} />
             </div>
           </div>
         </CardOverlay>
