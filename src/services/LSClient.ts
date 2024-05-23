@@ -11,7 +11,7 @@ class LSClient {
 
       const key = keys[1];
 
-      const response = JSON.parse(localStorage.getItem(key)!) as T[];
+      const response = (JSON.parse(localStorage.getItem(key)!) as T[]) || [];
       if (response === null) reject(new Error("Invalid Url"));
       if (id) {
         //@ts-ignore
