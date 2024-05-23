@@ -88,7 +88,9 @@ const PlaylistForm = ({ onClose, _formData }: PlaylistFormProps) => {
 
     const newTrack = formData;
     if (isEditMode) {
-      dispatch(EditPlaylist({ id: _formData.id, ...newTrack }));
+      dispatch(
+        EditPlaylist({ id: _formData.id, count: _formData.count, ...newTrack })
+      );
     } else {
       dispatch(
         createPlaylist({ id: randomIdGenerator(), count: 0, ...formData })
