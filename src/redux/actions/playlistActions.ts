@@ -36,7 +36,7 @@ const createPlaylistSaga = function* (action: any) {
   try {
     yield put(createPlaylistStart());
     const playlist: Playlist = action.payload;
-    const response = yield call(addPlaylist, playlist);
+    const response: Playlist = yield call(addPlaylist, playlist);
     yield put(createPlaylistSuccess(response));
     yield put(fetchPlaylists());
   } catch (error) {
@@ -48,7 +48,7 @@ const EditPlaylistSaga = function* (action: any) {
   try {
     yield put(EditPlaylistStart());
     const playlist: Playlist = action.payload;
-    const response = yield call(updatePlaylist, playlist);
+    const response: Playlist = yield call(updatePlaylist, playlist);
     yield put(EditPlaylistSuccess(response));
     yield put(fetchPlaylists());
   } catch (error) {
@@ -59,8 +59,8 @@ const EditPlaylistSaga = function* (action: any) {
 const DeletePlaylistSaga = function* (action: any) {
   try {
     yield put(DeletePlaylistStart());
-    const playlistId: Playlist = action.payload;
-    yield call(deletePlaylist, playlistId);
+    const playlistId: string = action.payload;
+    yield call({ context: null, fn: deletePlaylist }, playlistId);
     yield put(DeletePlaylistSuccess(playlistId));
     yield put(fetchPlaylists());
   } catch (error) {
