@@ -65,7 +65,6 @@ class LSClient {
         if (toBeUpdatedPlaylistIdx !== -1) {
           response[toBeUpdatedPlaylistIdx] = data;
         }
-        console.log(response);
         localStorage.setItem(key, JSON.stringify(response));
         resolve(data);
       } else {
