@@ -23,7 +23,7 @@ const initialState: PlaylistState = {
 };
 
 const playlistSlice = createSlice({
-  name: "track",
+  name: "playlist",
   initialState,
   reducers: {
     setCurrentPlaying(state, action) {
