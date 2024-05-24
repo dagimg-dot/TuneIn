@@ -64,7 +64,7 @@ interface TrackFormProps {
 }
 
 const TrackForm = ({ onClose, _formData }: TrackFormProps) => {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<Track>({
     title: _formData?.title || "",
     artist: _formData?.artist || "",
     genre: _formData?.genre || "",
