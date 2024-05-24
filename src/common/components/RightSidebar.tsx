@@ -12,6 +12,7 @@ import { useEffect } from "react";
 import { Status, fetchTracks } from "../../redux/reducers/trackReducer";
 import { Track } from "../../shared/types";
 import { GlobalState } from "../../redux/reducers/rootReducer";
+import UserSection from "./UserSection";
 
 const Container = styled.div`
   padding: 10px;
@@ -39,7 +40,7 @@ function RightSidebar() {
 
   return (
     <Container>
-      <div css={{ height: "100px" }}></div>
+      <UserSection />
       <Heading title="Now playing" />
       <SongList>
         {status === Status.LOADING && "Loading"}

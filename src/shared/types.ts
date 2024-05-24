@@ -15,3 +15,8 @@ export interface Playlist {
   image?: string;
   tracks?: Track[];
 }
+
+export interface User {
+  userName: string;
+  image?: string;
+}
