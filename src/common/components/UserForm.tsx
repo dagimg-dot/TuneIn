@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { GlobalState } from "../../redux/reducers/rootReducer";
 import toast from "react-hot-toast";
 import { EditUser, createUser } from "../../redux/reducers/userReducer";
+import randomIdGenerator from "../../utils/idGenerator";
 
 const FormContainer = styled.div`
   display: flex;
@@ -66,7 +67,7 @@ function UserForm({ onClose, _formData }: UserFormProps) {
     image: _formData?.image || "",
   });
 
-  const isEditMode = _formData?.userName !== "User";
+  const isEditMode = _formData?.id !== undefined;
 
   const status = useSelector((state: GlobalState) => state.user.status);
   const dispatch = useDispatch();
@@ -85,9 +86,9 @@ function UserForm({ onClose, _formData }: UserFormProps) {
 
     const newUser = formData;
     if (isEditMode) {
-      dispatch(EditUser(newUser));
+      dispatch(EditUser({ id: _formData?.id, ...newUser }));
     } else {
-      dispatch(createUser(newUser));
+      dispatch(createUser({ id: randomIdGenerator(), ...newUser }));
     }
 
     if (status === Status.SUCCEEDED && isEditMode) {

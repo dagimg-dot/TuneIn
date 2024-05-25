@@ -1,5 +1,12 @@
 import { all, call, fork, put, takeEvery } from "redux-saga/effects";
 import {
+  EditUserFail,
+  EditUserStart,
+  EditUserSuccess,
+  createUserFail,
+  createUserStart,
+  createUserSuccess,
+  fetchUser,
   fetchUserFail,
   fetchUserStart,
   fetchUserSuccess,
@@ -10,7 +17,7 @@ import { addUser, getUser, updateUser } from "../../services/userService";
 const fetchUserSaga = function* () {
   try {
     yield put(fetchUserStart());
-    const user: User = yield call(getUser);
+    const user: User[] = yield call(getUser);
     yield put(fetchUserSuccess(user));
   } catch (error) {
     yield put(fetchUserFail((error as Error).message));
@@ -19,23 +26,24 @@ const fetchUserSaga = function* () {
 
 const createUserSaga = function* (action: any) {
   try {
-    yield put(fetchUserStart());
+    yield put(createUserStart());
     const user: User = action.payload;
-    const response: User = yield call(addUser, user);
-    yield put(fetchUserSuccess(response));
+    const response: User[] = yield call(addUser, user);
+    yield put(createUserSuccess(response));
   } catch (error) {
-    yield put(fetchUserFail((error as Error).message));
+    yield put(createUserFail((error as Error).message));
   }
 };
 
 const editUserSaga = function* (action: any) {
   try {
-    yield put(fetchUserStart());
+    yield put(EditUserStart());
     const user: User = action.payload;
     const response: User[] = yield call(updateUser, user);
-    yield put(fetchUserSuccess(response));
+    yield put(EditUserSuccess(response));
+    yield put(fetchUser());
   } catch (error) {
-    yield put(fetchUserFail((error as Error).message));
+    yield put(EditUserFail((error as Error).message));
   }
 };
 

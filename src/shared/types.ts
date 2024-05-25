@@ -17,6 +17,7 @@ export interface Playlist {
 }
 
 export interface User {
+  id?: string;
   userName: string;
   image?: string;
 }

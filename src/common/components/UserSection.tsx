@@ -1,9 +1,10 @@
 import styled from "@emotion/styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Modal from "./Modal";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { GlobalState } from "../../redux/reducers/rootReducer";
 import UserForm from "./UserForm";
+import { fetchUser } from "../../redux/reducers/userReducer";
 
 const UserContainer = styled.div`
   display: flex;
@@ -14,6 +15,7 @@ const UserContainer = styled.div`
 `;
 
 const Avatar = styled.img`
+  cursor: pointer;
   border-radius: 100%;
   width: 60px;
   height: 60px;
@@ -22,26 +24,31 @@ const Avatar = styled.img`
 
 function UserSection() {
   const [isOpen, setIsOpen] = useState(false);
-  const { user } = useSelector((state: GlobalState) => state.user);
+  const { users } = useSelector((state: GlobalState) => state.user);
+  const dispatch = useDispatch();
 
   const handleAvatarClick = () => {
     setIsOpen(true);
   };
 
+  useEffect(() => {
+    dispatch(fetchUser());
+  }, [dispatch]);
+
   return (
     <UserContainer>
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <UserForm onClose={() => setIsOpen(false)} _formData={user} />
+        <UserForm onClose={() => setIsOpen(false)} _formData={users[0]} />
       </Modal>
       <span
         css={{
           fontWeight: "700",
         }}
       >
-        {user.userName}
+        {users[0].userName}
       </span>
       <Avatar
-        src={user.image == "" ? "/J.jpg" : user.image}
+        src={users[0].image == "" ? "/J.jpg" : users[0].image}
         onClick={handleAvatarClick}
       />
     </UserContainer>

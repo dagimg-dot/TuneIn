@@ -9,13 +9,13 @@ export enum Status {
 }
 
 export interface UserState {
-  user: User;
+  users: User[];
   status: Status;
   error: null;
 }
 
 const initialState: UserState = {
-  user: { userName: "User", image: "" },
+  users: [{ userName: "User", image: "" }],
   status: Status.IDLE,
   error: null,
 };
@@ -29,10 +29,13 @@ const userSlice = createSlice({
     },
     fetchUserSuccess(state, action) {
       state.status = Status.SUCCEEDED;
-      state.user = action.payload;
+      if (action.payload.length != 0) {
+        state.users = action.payload;
+      }
     },
     fetchUserFail(state, action) {
       state.status = Status.FAILED;
+      console.log("user fetch failed");
       state.error = action.payload;
     },
     createUserStart(state) {
@@ -40,7 +43,7 @@ const userSlice = createSlice({
     },
     createUserSuccess(state, action) {
       state.status = Status.SUCCEEDED;
-      state.user = action.payload;
+      state.users = [action.payload];
       state.status = Status.IDLE;
     },
     createUserFail(state, action) {
@@ -52,7 +55,7 @@ const userSlice = createSlice({
     },
     EditUserSuccess(state, action) {
       state.status = Status.SUCCEEDED;
-      state.user = action.payload;
+      state.users = [action.payload];
       state.status = Status.IDLE;
     },
     EditUserFail(state, action) {
@@ -82,8 +85,8 @@ export const createUser = (user: User) => ({
 });
 
 export const EditUser = (user: User) => ({
-  type: "user/EditUserSaga",
+  type: "user/editUserSaga",
   payload: user,
 });
 
-export default userSlice.reducer
+export default userSlice.reducer;
