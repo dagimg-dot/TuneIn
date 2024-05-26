@@ -8,7 +8,6 @@ import { Light } from "../../shared/styles/colors";
 import Featured from "./components/Featured";
 import PlaylistsSection from "./components/PlaylistsSection";
 import Recommendation from "./components/Recommendation";
-import Search from "./components/Search";
 
 const BrowseContainer = styled.div`
   display: flex;
@@ -23,7 +22,6 @@ const BrowseContainer = styled.div`
 function Browse() {
   return (
     <BrowseContainer>
-      <Search />
       <Featured />
       <PlaylistsSection />
       <Recommendation />
