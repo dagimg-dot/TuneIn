@@ -132,3 +132,13 @@ class LSClient {
 
 export default LSClient;
 ```
+
+- **This is an example usage of the LSClient class (The backend)**
+
+```typescript
+// trackService.ts
+
+export const addTrack = async (track: Track): Promise<Track> => {
+  return await LSClient.post("/tracks", track);
+};
+```
