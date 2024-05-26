@@ -4,6 +4,8 @@ import Default from "./layout/Default";
 import Browse from "./pages/home/Browse";
 import Playlists from "./pages/playlist/Playlists";
 import { Toaster } from "react-hot-toast";
+import Favorites from "./pages/favorites/Favorites";
+import SinglePlaylist from "./pages/playlist/SinglePlaylist";
 
 function App() {
   return (
@@ -14,6 +16,8 @@ function App() {
             <Route path="/" element={<Browse />} />
             <Route path="/tracks" element={<Tracks />} />
             <Route path="/playlists" element={<Playlists />} />
+            <Route path="/playlists/:id" element={<SinglePlaylist />} />
+            <Route path="/favorites" element={<Favorites />} />
           </Route>
         </Routes>
       </BrowserRouter>
