@@ -44,6 +44,8 @@ export const Tile = styled.div`
   &:hover {
     background-color: ${Light.tileHover};
     border-radius: 10px;
+    padding-left: 5px;
+    padding-bottom: 5px;
   }
 `;
 

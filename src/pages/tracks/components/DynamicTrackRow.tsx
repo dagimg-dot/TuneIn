@@ -21,6 +21,7 @@ import {
 } from "../../../redux/reducers/trackReducer";
 import toast from "react-hot-toast";
 import { GlobalState } from "../../../redux/reducers/rootReducer";
+import AddToPlaylistForm from "./AddToPlaylistForm";
 
 const UtilityContextContainer = styled.div`
   background: linear-gradient(to right, #282828, #202020);
@@ -72,7 +73,8 @@ function DynamicTrackRow({ track }: TrackRowProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [cordinate, setCordinate] = useState({ x: 0, y: 0 });
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isAPModalOpen, setIsAPModalOpen] = useState(false);
+  const [isATPModalOpen, setIsATPModalOpen] = useState(false);
 
   const status = useSelector((state: GlobalState) => state.track.status);
 
@@ -106,7 +108,8 @@ function DynamicTrackRow({ track }: TrackRowProps) {
   };
 
   const handleModalClose = () => {
-    setIsModalOpen(false);
+    setIsAPModalOpen(false);
+    setIsATPModalOpen(false);
     setIsHovered(false);
   };
 
@@ -129,7 +132,7 @@ function DynamicTrackRow({ track }: TrackRowProps) {
         }}
       >
         <UtilityContextContainer>
-          <UtilityContextItem onClick={() => setIsModalOpen(true)}>
+          <UtilityContextItem onClick={() => setIsAPModalOpen(true)}>
             <Edit2Icon size={16} />
             <span>Edit</span>
           </UtilityContextItem>
@@ -137,14 +140,17 @@ function DynamicTrackRow({ track }: TrackRowProps) {
             <MinusCircle size={18} />
             <span>Delete</span>
           </UtilityContextItem>
-          <UtilityContextItem>
+          <UtilityContextItem onClick={() => setIsATPModalOpen(true)}>
             <Plus size={18} />
             <span>Add to playlist</span>
           </UtilityContextItem>
         </UtilityContextContainer>
       </ContextMenu>
-      <Modal isOpen={isModalOpen} onClose={handleModalClose}>
+      <Modal isOpen={isAPModalOpen} onClose={handleModalClose}>
         <TrackForm onClose={handleModalClose} _formData={track} />
+      </Modal>
+      <Modal isOpen={isATPModalOpen} onClose={handleModalClose}>
+        <AddToPlaylistForm onClose={handleModalClose} track={track} />
       </Modal>
       <BasicInfoContainer>
         <div
