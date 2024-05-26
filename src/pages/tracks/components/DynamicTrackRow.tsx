@@ -123,29 +123,32 @@ function DynamicTrackRow({ track }: TrackRowProps) {
       //@ts-ignore
       onContextMenu={handleContextMenu}
     >
-      <ContextMenu
-        isOpen={isOpen}
-        mouseCordinates={cordinate}
-        onClose={() => {
-          setIsOpen(false);
-          setIsHovered(false);
-        }}
-      >
-        <UtilityContextContainer>
-          <UtilityContextItem onClick={() => setIsAPModalOpen(true)}>
-            <Edit2Icon size={16} />
-            <span>Edit</span>
-          </UtilityContextItem>
-          <UtilityContextItem onClick={handleDelete}>
-            <MinusCircle size={18} />
-            <span>Delete</span>
-          </UtilityContextItem>
-          <UtilityContextItem onClick={() => setIsATPModalOpen(true)}>
-            <Plus size={18} />
-            <span>Add to playlist</span>
-          </UtilityContextItem>
-        </UtilityContextContainer>
-      </ContextMenu>
+      {!isAPModalOpen && !isATPModalOpen && (
+        <ContextMenu
+          isOpen={isOpen}
+          mouseCordinates={cordinate}
+          onClose={() => {
+            setIsOpen(false);
+            setIsHovered(false);
+          }}
+        >
+          <UtilityContextContainer>
+            <UtilityContextItem onClick={() => setIsAPModalOpen(true)}>
+              <Edit2Icon size={16} />
+              <span>Edit</span>
+            </UtilityContextItem>
+            <UtilityContextItem onClick={handleDelete}>
+              <MinusCircle size={18} />
+              <span>Delete</span>
+            </UtilityContextItem>
+            <UtilityContextItem onClick={() => setIsATPModalOpen(true)}>
+              <Plus size={18} />
+              <span>Add to playlist</span>
+            </UtilityContextItem>
+          </UtilityContextContainer>
+        </ContextMenu>
+      )}
+
       <Modal isOpen={isAPModalOpen} onClose={handleModalClose}>
         <TrackForm onClose={handleModalClose} _formData={track} />
       </Modal>
