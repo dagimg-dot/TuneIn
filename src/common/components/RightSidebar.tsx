@@ -46,10 +46,9 @@ function RightSidebar() {
         {status === Status.LOADING && "Loading"}
         {status === Status.FAILED && "Can not fetch Tracks"}
         {!error
-          ? tracks.map(
-              (track: Track) =>
-                track && track.id && <SongTile track={track} key={track.id} />
-            )
+          ? tracks.map((track: Track) => (
+              <SongTile track={track} key={track.id} />
+            ))
           : "Something went wrong"}
       </SongList>
     </Container>
