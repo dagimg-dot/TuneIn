@@ -81,6 +81,12 @@ const TextButton = styled.div`
   }
 `;
 
+const Message = styled.span`
+  font-size: 18px;
+  margin: 0 auto;
+  color: ${Light.textColor};
+`;
+
 interface ATPProps {
   onClose: () => void;
   track: Track;
@@ -88,6 +94,8 @@ interface ATPProps {
 
 function AddToPlaylistForm({ onClose, track }: ATPProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredPlaylists, setFilteredPlaylists] = useState<Playlist[]>([]);
 
   const { playlists, status, error } = useSelector(
     (state: GlobalState) => state.playlist
@@ -96,7 +104,6 @@ function AddToPlaylistForm({ onClose, track }: ATPProps) {
 
   useEffect(() => {
     dispatch(fetchPlaylists());
-    console.log(playlists);
   }, [dispatch]);
 
   const handleAddToPlaylist = (playlist: Playlist) => {
@@ -121,6 +128,30 @@ function AddToPlaylistForm({ onClose, track }: ATPProps) {
     onClose();
   };
 
+  function renderPlaylists(playlistToRender: Playlist[]) {
+    return playlistToRender.map(
+      (playlist: Playlist) =>
+        playlist &&
+        playlist.id && (
+          <PlaylistTile
+            playlist={playlist}
+            key={playlist.id}
+            onClick={handleAddToPlaylist}
+          />
+        )
+    );
+  }
+
+  const handleSearchChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
+    const query = ev.target.value;
+    setSearchQuery(query);
+    if (query === "") return setFilteredPlaylists(playlists);
+    const filtered = playlists.filter((playlist) =>
+      playlist.name.toLowerCase().includes(query.toLowerCase())
+    );
+    setFilteredPlaylists(filtered);
+  };
+
   return (
     <FormContainer>
       <FormHeader>
@@ -142,8 +173,8 @@ function AddToPlaylistForm({ onClose, track }: ATPProps) {
       <TextField
         type="text"
         name="playlist"
-        // value={formData.name}
-        // onChange={handleChange}
+        value={searchQuery}
+        onChange={handleSearchChange}
         placeholder="Search playlist"
         disabled={playlists.length == 0}
         required
@@ -160,26 +191,13 @@ function AddToPlaylistForm({ onClose, track }: ATPProps) {
         {status === Status.FAILED && "Can not fetch Playlists"}
         {!error ? (
           playlists.length == 0 ? (
-            <span
-              css={{
-                fontSize: "18px",
-                margin: "0 auto",
-              }}
-            >
-              There are no playlists to be shown
-            </span>
+            <Message>There are no playlists to be shown</Message>
+          ) : filteredPlaylists.length > 0 ? (
+            renderPlaylists(filteredPlaylists)
+          ) : searchQuery !== "" ? (
+            <Message>No playlists found containing "{searchQuery}"</Message>
           ) : (
-            playlists.map(
-              (playlist: Playlist) =>
-                playlist &&
-                playlist.id && (
-                  <PlaylistTile
-                    playlist={playlist}
-                    key={playlist.id}
-                    onClick={handleAddToPlaylist}
-                  />
-                )
-            )
+            renderPlaylists(playlists)
           )
         ) : (
           "Something went wrong"
