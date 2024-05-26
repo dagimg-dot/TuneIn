@@ -1,5 +1,4 @@
 import styled from "@emotion/styled";
-import { Track } from "../../shared/types";
 import {
   NextSongIcon,
   PlayPauseIcon,
@@ -47,14 +46,15 @@ function MainControl() {
 
 interface SecondaryControlProps {
   duration: string;
+  isLiked: boolean;
 }
 
-function SecondaryControl({ duration }: SecondaryControlProps) {
+function SecondaryControl({ duration, isLiked }: SecondaryControlProps) {
   return (
     <div css={{ display: "flex", gap: "15px", alignItems: "center" }}>
       <div>{duration}</div>
       <div>
-        <Heart size={22} fill="white" />
+        <Heart size={22} fill={isLiked ? "white" : "transparent"} />
       </div>
       <div>
         <FontAwesomeIcon icon={faVolumeHigh} size="lg" />
@@ -72,7 +72,9 @@ function SecondaryControl({ duration }: SecondaryControlProps) {
 }
 
 function Player() {
-  let songDetail: Track = useSelector((state: GlobalState) => state.track.currentPlaying);
+  let songDetail = useSelector(
+    (state: GlobalState) => state.track.currentPlaying
+  );
   3;
 
   if (songDetail == null) {
@@ -125,7 +127,10 @@ function Player() {
           <MainControl />
         </div>
         <div>
-          <SecondaryControl duration={songDetail.duration} />
+          <SecondaryControl
+            duration={songDetail.duration}
+            isLiked={songDetail.isLiked}
+          />
         </div>
       </InnerContainer>
     </Container>
