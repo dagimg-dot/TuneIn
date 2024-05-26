@@ -37,8 +37,8 @@ const createTrackSaga = function* (action: any) {
   try {
     yield put(createTrackStart());
     const track: Track = action.payload;
-    const response = yield call(addTrack, track);
-    yield put(createTrackSuccess(response.data));
+    const response: Track[] = yield call(addTrack, track);
+    yield put(createTrackSuccess(response));
     yield put(fetchTracks());
   } catch (error) {
     yield put(createTrackFail((error as Error).message));
@@ -49,7 +49,7 @@ const EditTrackSaga = function* (action: any) {
   try {
     yield put(EditTrackStart());
     const track: Track = action.payload;
-    const response = yield call(updateTrack, track);
+    const response: Track[] = yield call(updateTrack, track);
     yield put(EditTrackSuccess(response));
     yield put(fetchTracks());
   } catch (error) {
