@@ -9,6 +9,9 @@ import {
   createPlaylistFail,
   createPlaylistStart,
   createPlaylistSuccess,
+  fetchPlaylistFail,
+  fetchPlaylistStart,
+  fetchPlaylistSuccess,
   fetchPlaylists,
   fetchPlaylistsFail,
   fetchPlaylistsStart,
@@ -18,17 +21,29 @@ import { Playlist } from "../../shared/types";
 import {
   addPlaylist,
   deletePlaylist,
+  getPlaylist,
   getPlaylists,
   updatePlaylist,
 } from "../../services/playlistService";
 
-const fetchPlaylistSaga = function* () {
+const fetchPlaylistsSaga = function* () {
   try {
     yield put(fetchPlaylistsStart());
     const playlists: Playlist[] = yield call(getPlaylists);
     yield put(fetchPlaylistsSuccess(playlists));
   } catch (error) {
     yield put(fetchPlaylistsFail((error as Error).message));
+  }
+};
+
+const fetchPlaylistSaga = function* (action: any) {
+  try {
+    yield put(fetchPlaylistStart());
+    const id: string = action.payload;
+    const playlist: Playlist = yield call(getPlaylist, id);
+    yield put(fetchPlaylistSuccess(playlist));
+  } catch (error) {
+    yield put(fetchPlaylistFail((error as Error).message));
   }
 };
 
@@ -68,8 +83,12 @@ const DeletePlaylistSaga = function* (action: any) {
   }
 };
 
+const watchFetchPlaylist = function* () {
+  yield takeEvery("playlist/fetchPlaylistSaga", fetchPlaylistSaga);
+};
+
 const watchFetchPlaylists = function* () {
-  yield takeEvery("playlist/fetchPlaylistsSaga", fetchPlaylistSaga);
+  yield takeEvery("playlist/fetchPlaylistsSaga", fetchPlaylistsSaga);
 };
 
 const watchCreatePlaylist = function* () {
@@ -87,6 +106,7 @@ const watchDeletePlaylist = function* () {
 export function* playlistSaga() {
   yield all([
     fork(watchFetchPlaylists),
+    fork(watchFetchPlaylist),
     fork(watchCreatePlaylist),
     fork(watchEditPlaylist),
     fork(watchDeletePlaylist),
