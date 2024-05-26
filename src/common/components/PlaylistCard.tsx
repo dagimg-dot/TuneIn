@@ -137,7 +137,7 @@ function PlaylistCard({
             }}
           >
             <span>
-              <strong>{playlist.count}</strong> Tracks
+              <strong>{playlist.tracks?.length}</strong> Tracks
             </span>
             <div
               css={{
