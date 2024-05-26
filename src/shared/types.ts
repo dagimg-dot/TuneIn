@@ -6,6 +6,7 @@ export interface Track {
   genre: string;
   image?: string;
   releasedDate: string;
+  isLiked: boolean;
 }
 
 export interface Playlist {
