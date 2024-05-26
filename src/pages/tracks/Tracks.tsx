@@ -75,15 +75,24 @@ function Tracks() {
             >
               {status === Status.LOADING && "Loading"}
               {status === Status.FAILED && "Can not fetch Tracks"}
-              {!error
-                ? tracks.map(
-                    (track: Track) =>
-                      track &&
-                      track.id && (
-                        <DynamicTrackRow track={track} key={track.id} />
-                      )
-                  )
-                : "Something went wrong"}
+              {!error ? (
+                tracks.length == 0 ? (
+                  <span
+                    css={{
+                      fontSize: "18px",
+                      margin: "0 auto",
+                    }}
+                  >
+                    There are no tracks to be shown
+                  </span>
+                ) : (
+                  tracks.map((track: Track) => (
+                    <DynamicTrackRow track={track} key={track.id} />
+                  ))
+                )
+              ) : (
+                "Something went wrong"
+              )}
             </div>
           </div>
         </TrackListContainer>
