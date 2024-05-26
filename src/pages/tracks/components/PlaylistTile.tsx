@@ -1,12 +1,18 @@
-import { Playlist } from "../../../shared/types";
+import { Playlist, Track } from "../../../shared/types";
 import { AlbumArt, Tile } from "../../../shared/styles/style";
+import { Check } from "lucide-react";
 
 interface PlaylistTileProps {
   playlist: Playlist;
+  track: Track;
   onClick: (playlist: Playlist) => void;
 }
 
-function PlaylistTile({ playlist, onClick }: PlaylistTileProps) {
+function PlaylistTile({ playlist, track, onClick }: PlaylistTileProps) {
+  const isAlreadyInPlaylist = playlist.tracks?.some(
+    (t: Track) => t.id == track.id
+  );
+
   return (
     <Tile
       onClick={() => onClick(playlist)}
@@ -40,10 +46,18 @@ function PlaylistTile({ playlist, onClick }: PlaylistTileProps) {
           <span>{playlist.name}</span>
         </div>
       </div>
-      <div>
-        {playlist.tracks?.length == 1 || playlist.tracks?.length == 0
-          ? `${playlist.tracks.length} track`
-          : `${playlist.tracks?.length} tracks`}{" "}
+      <div
+        css={{
+          display: "flex",
+          gap: "10px",
+        }}
+      >
+        <div>{isAlreadyInPlaylist && <Check color="#87a784" />}</div>
+        <div>
+          {playlist.tracks?.length == 1 || playlist.tracks?.length == 0
+            ? `${playlist.tracks.length} track`
+            : `${playlist.tracks?.length} tracks`}{" "}
+        </div>
       </div>
     </Tile>
   );

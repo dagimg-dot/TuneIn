@@ -134,6 +134,7 @@ function AddToPlaylistForm({ onClose, track }: ATPProps) {
         playlist &&
         playlist.id && (
           <PlaylistTile
+            track={track}
             playlist={playlist}
             key={playlist.id}
             onClick={handleAddToPlaylist}
