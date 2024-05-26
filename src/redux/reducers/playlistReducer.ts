@@ -10,6 +10,7 @@ export enum Status {
 
 export interface PlaylistState {
   playlists: Playlist[];
+  playlist: Playlist | null;
   currentPlaying: Playlist | null;
   status: Status;
   error: null;
@@ -17,6 +18,7 @@ export interface PlaylistState {
 
 const initialState: PlaylistState = {
   playlists: [],
+  playlist: null,
   currentPlaying: null,
   status: Status.IDLE,
   error: null,
@@ -39,6 +41,17 @@ const playlistSlice = createSlice({
     fetchPlaylistsFail(state, action) {
       state.status = Status.FAILED;
       state.playlists = action.payload;
+    },
+    fetchPlaylistStart(state) {
+      state.status = Status.LOADING;
+    },
+    fetchPlaylistSuccess(state, action) {
+      state.status = Status.SUCCEEDED;
+      state.playlist = action.payload;
+    },
+    fetchPlaylistFail(state, action) {
+      state.status = Status.FAILED;
+      state.playlist = action.payload;
     },
     createPlaylistStart(state) {
       state.status = Status.LOADING;
@@ -92,6 +105,9 @@ export const {
   fetchPlaylistsStart,
   fetchPlaylistsSuccess,
   fetchPlaylistsFail,
+  fetchPlaylistStart,
+  fetchPlaylistSuccess,
+  fetchPlaylistFail,
   createPlaylistStart,
   createPlaylistSuccess,
   createPlaylistFail,
@@ -104,6 +120,11 @@ export const {
 } = playlistSlice.actions;
 
 export const fetchPlaylists = () => ({ type: "playlist/fetchPlaylistsSaga" });
+
+export const fetchPlaylist = (id: string) => ({
+  type: "playlist/fetchPlaylistSaga",
+  payload: id,
+});
 
 export const createPlaylist = (playlist: Playlist) => ({
   type: "playlist/createPlaylistSaga",

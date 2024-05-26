@@ -1,4 +1,4 @@
-import { Track } from "../../../shared/types";
+import { Playlist, Track } from "../../../shared/types";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -8,7 +8,7 @@ import {
   TableRow,
 } from "../../../shared/styles/style";
 import { Edit2Icon, Heart, MinusCircle, Plus } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ContextMenu from "../../../common/components/ContextMenu";
 import styled from "@emotion/styled";
 import TrackForm from "./TrackForm";
@@ -16,12 +16,14 @@ import Modal from "../../../common/components/Modal";
 import { useDispatch, useSelector } from "react-redux";
 import {
   DeleteTrack,
+  EditTrack,
   Status,
   setCurrentPlaying,
 } from "../../../redux/reducers/trackReducer";
 import toast from "react-hot-toast";
 import { GlobalState } from "../../../redux/reducers/rootReducer";
 import AddToPlaylistForm from "./AddToPlaylistForm";
+import { EditPlaylist } from "../../../redux/reducers/playlistReducer";
 
 const UtilityContextContainer = styled.div`
   background: linear-gradient(to right, #282828, #202020);
@@ -51,25 +53,42 @@ const BasicInfoContainer = styled.div`
   padding: 5px;
 `;
 
-const HeartIcon = () => {
+interface HeartIconProps {
+  isLiked: boolean;
+  onClick: () => void;
+}
+
+const HeartIcon = ({ isLiked, onClick }: HeartIconProps) => {
+  const [isLikedState, setIsLikedState] = useState(isLiked);
+
+  useEffect(() => {
+    setIsLikedState(isLiked);
+  }, [isLiked]);
+
   return (
     <div
       css={{
         display: "flex",
         alignItems: "center",
         cursor: "pointer",
+        transition: "all 0.3s ease-in-out",
+        "&:hover": {
+          transform: "scale(1.1)",
+        },
       }}
+      onClick={onClick}
     >
-      <Heart />
+      <Heart fill={isLikedState ? "white" : "transparent"} />
     </div>
   );
 };
 
 interface TrackRowProps {
   track: Track;
+  isSinglePlaylist?: Playlist;
 }
 
-function DynamicTrackRow({ track }: TrackRowProps) {
+function DynamicTrackRow({ track, isSinglePlaylist }: TrackRowProps) {
   const [isHovered, setIsHovered] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [cordinate, setCordinate] = useState({ x: 0, y: 0 });
@@ -80,12 +99,12 @@ function DynamicTrackRow({ track }: TrackRowProps) {
 
   const dispatch = useDispatch();
 
-  const handleContextMenu = (ev: MouseEvent) => {
+  const handleContextMenu = (ev: React.MouseEvent<HTMLDivElement>) => {
     ev.preventDefault();
     setIsOpen(true);
   };
 
-  const trackMouse = (ev: MouseEvent) => {
+  const trackMouse = (ev: React.MouseEvent<HTMLDivElement>) => {
     if (!isOpen) {
       setCordinate({ x: ev.clientX, y: ev.clientY });
     }
@@ -113,14 +132,36 @@ function DynamicTrackRow({ track }: TrackRowProps) {
     setIsHovered(false);
   };
 
+  const handleHeartClick = () => {
+    const updatedTrack: Track = {
+      ...track,
+      isLiked: !track.isLiked,
+    };
+
+    dispatch(EditTrack(updatedTrack));
+  };
+
+  const handleRemoveFromPlaylist = (isSinglePlaylist: Playlist) => {
+    const newPlaylist: Playlist = {
+      ...isSinglePlaylist,
+      tracks: isSinglePlaylist.tracks?.filter((t) => t.id !== track.id),
+    };
+
+    dispatch(EditPlaylist(newPlaylist));
+
+    if (status === Status.SUCCEEDED) {
+      toast.success(
+        `${track.title} removed from playlist ${isSinglePlaylist.name} Successfully`
+      );
+    }
+  };
+
   return (
     <TableRow
       onClick={() => setIsOpen(false)}
-      //@ts-ignore
       onMouseMove={trackMouse}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      //@ts-ignore
       onContextMenu={handleContextMenu}
     >
       {!isAPModalOpen && !isATPModalOpen && (
@@ -145,6 +186,14 @@ function DynamicTrackRow({ track }: TrackRowProps) {
               <Plus size={18} />
               <span>Add to playlist</span>
             </UtilityContextItem>
+            {isSinglePlaylist && (
+              <UtilityContextItem
+                onClick={() => handleRemoveFromPlaylist(isSinglePlaylist)}
+              >
+                <MinusCircle size={18} />
+                <span>Remove from playlist</span>
+              </UtilityContextItem>
+            )}
           </UtilityContextContainer>
         </ContextMenu>
       )}
@@ -192,7 +241,7 @@ function DynamicTrackRow({ track }: TrackRowProps) {
           transition: "all 0.3s ease-in-out",
         }}
       >
-        <HeartIcon />
+        <HeartIcon isLiked={track.isLiked} onClick={handleHeartClick} />
       </div>
       <div
         css={{

@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { DeletePlaylist, Status } from "../../redux/reducers/playlistReducer";
 import { GlobalState } from "../../redux/reducers/rootReducer";
 import toast from "react-hot-toast";
+import { useNavigate } from "react-router-dom";
 
 const CardBox = styled.div`
   position: relative;
@@ -78,13 +79,14 @@ function PlaylistCard({
 
   const status = useSelector((state: GlobalState) => state.playlist.status);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const handleContextMenu = (ev: MouseEvent) => {
+  const handleContextMenu = (ev: React.MouseEvent<HTMLDivElement>) => {
     ev.preventDefault();
     setIsOpen(true);
   };
 
-  const trackMouse = (ev: MouseEvent) => {
+  const trackMouse = (ev: React.MouseEvent<HTMLDivElement>) => {
     if (!isOpen) {
       setCordinate({ x: ev.clientX, y: ev.clientY });
     }
@@ -108,17 +110,20 @@ function PlaylistCard({
   };
 
   return (
-    <div>
+    <div
+      onClick={() => {
+        if (isOpen) return;
+        navigate(`/playlists/${playlist.id}`);
+      }}
+    >
       <Modal isOpen={isModalOpen} onClose={handleModalClose}>
         <PlaylistForm onClose={handleModalClose} _formData={playlist} />
       </Modal>
       <CardBox
         onClick={() => setIsOpen(false)}
-        //@ts-ignore
         onMouseMove={trackMouse}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
-        //@ts-ignore
         onContextMenu={handleContextMenu}
       >
         <CardOverlay>

@@ -29,8 +29,12 @@ const StyledLink = styled(Link)`
 function Tab({ title, navigateTo, icon }: TabProps) {
   const { pathname } = useLocation();
   const isActive = (path: string) => {
-    return pathname == path;
+    if (path == "/") {
+      return pathname == path;
+    }
+    return pathname.includes(path);
   };
+
   return (
     <StyledLink to={navigateTo}>
       {icon}
