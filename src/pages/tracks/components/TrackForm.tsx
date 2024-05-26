@@ -12,6 +12,7 @@ import {
 } from "../../../redux/reducers/trackReducer";
 import { GlobalState } from "../../../redux/reducers/rootReducer";
 import toast from "react-hot-toast";
+import randomIdGenerator from "../../../utils/idGenerator";
 
 const FormContainer = styled.div`
   display: flex;
@@ -70,6 +71,7 @@ const TrackForm = ({ onClose, _formData }: TrackFormProps) => {
     genre: _formData?.genre || "",
     releasedDate: _formData?.releasedDate || "",
     duration: _formData?.duration || "",
+    isLiked: _formData?.isLiked || false,
   });
   const isEditMode = _formData?.id !== undefined;
 
@@ -92,7 +94,7 @@ const TrackForm = ({ onClose, _formData }: TrackFormProps) => {
     if (isEditMode) {
       dispatch(EditTrack({ id: _formData.id, ...newTrack }));
     } else {
-      dispatch(createTrack(newTrack));
+      dispatch(createTrack({ id: randomIdGenerator(), ...newTrack }));
     }
 
     if (status === Status.SUCCEEDED && isEditMode) {
