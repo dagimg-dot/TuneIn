@@ -12,7 +12,7 @@ import {
   setCurrentPlaying,
   setFeaturedTrack,
 } from "../../../redux/reducers/trackReducer";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { GlobalState } from "../../../redux/reducers/rootReducer";
 import { useEffect, useState } from "react";
 
@@ -47,6 +47,7 @@ function Featured() {
     (state: GlobalState) => state.track
   );
   const [featuredTrackState, setFeaturedTrackState] = useState(featuredTrack);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     if (featuredTrack == null) {
@@ -55,6 +56,10 @@ function Featured() {
       setFeaturedTrackState(tracks[randomIndex]);
     }
   }, [tracks]);
+
+  const handlePlay = () => {
+    dispatch(setCurrentPlaying(featuredTrackState));
+  };
 
   return (
     <div>
@@ -84,7 +89,7 @@ function Featured() {
           </span>
         </div>
         <div>
-          <ListenBtn onClick={() => setCurrentPlaying(featuredTrack)}>
+          <ListenBtn onClick={handlePlay}>
             <FontAwesomeIcon icon={faPlay} size="xs" />
             <span>Listen now</span>
           </ListenBtn>
