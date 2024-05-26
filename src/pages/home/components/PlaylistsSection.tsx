@@ -20,7 +20,6 @@ function PlaylistsSection() {
 
   useEffect(() => {
     dispatch(fetchPlaylists());
-    console.log(playlists);
   }, [dispatch]);
 
   return (
