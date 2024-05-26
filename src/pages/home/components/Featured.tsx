@@ -8,6 +8,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlay } from "@fortawesome/free-solid-svg-icons";
 import Heading from "../../../common/components/Heading";
 import { Light } from "../../../shared/styles/colors";
+import {
+  setCurrentPlaying,
+  setFeaturedTrack,
+} from "../../../redux/reducers/trackReducer";
+import { useSelector } from "react-redux";
+import { GlobalState } from "../../../redux/reducers/rootReducer";
+import { useEffect, useState } from "react";
 
 const ListenBtn = styled.button`
   display: flex;
@@ -33,10 +40,22 @@ const FeaturedContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   box-shadow: -5px 5px 64px -7px #0f1111;
-
 `;
 
 function Featured() {
+  const { featuredTrack, tracks } = useSelector(
+    (state: GlobalState) => state.track
+  );
+  const [featuredTrackState, setFeaturedTrackState] = useState(featuredTrack);
+
+  useEffect(() => {
+    if (featuredTrack == null) {
+      const randomIndex = Math.floor(Math.random() * tracks.length);
+      setFeaturedTrack(tracks[randomIndex]);
+      setFeaturedTrackState(tracks[randomIndex]);
+    }
+  }, [tracks]);
+
   return (
     <div>
       <Heading title="Featured" />
@@ -53,7 +72,7 @@ function Featured() {
               fontSize: "24px",
             }}
           >
-            Billie Eilish
+            {featuredTrackState?.artist}
           </span>
           <span
             css={{
@@ -61,11 +80,11 @@ function Featured() {
               fontWeight: "600",
             }}
           >
-            What Was I Made For?
+            {featuredTrackState?.title}
           </span>
         </div>
         <div>
-          <ListenBtn>
+          <ListenBtn onClick={() => setCurrentPlaying(featuredTrack)}>
             <FontAwesomeIcon icon={faPlay} size="xs" />
             <span>Listen now</span>
           </ListenBtn>
